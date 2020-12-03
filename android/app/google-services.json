@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1087808620290",
+    "project_id": "mad-project-8569b",
+    "storage_bucket": "mad-project-8569b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087808620290:android:9de0532b01cf1795bb241b",
+        "android_client_info": {
+          "package_name": "com.nsbm.clubsplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087808620290-v19do0s1gl780cauvf6uf2uoa38kn71k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv5AqZLpnxq9Y_gybN69kYNZ0iXJFO328"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087808620290-v19do0s1gl780cauvf6uf2uoa38kn71k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
