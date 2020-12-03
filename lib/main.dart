@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mad_project/UI/Home.dart';
 
 void main() {
@@ -8,7 +9,7 @@ void main() {
 class ClubsPlus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Clubs Plus',
       theme: ThemeData(
         primarySwatch: Colors.blue,
