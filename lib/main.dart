@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_project/UI/Home.dart';
 
 void main() {
   runApp(ClubsPlus());
@@ -12,7 +13,7 @@ class ClubsPlus extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Home(),
     );
   }
 }
