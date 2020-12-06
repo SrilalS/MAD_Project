@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:cplustraining/config/palette.dart';
-import 'package:cplustraining/data/data.dart';
+import 'package:mad_project/config/palette.dart';
+import 'package:mad_project/data/data.dart';
 
-import 'package:cplustraining/widgets/widgets.dart';
-import 'package:cplustraining/models/models.dart';
+import 'package:mad_project/widgets/widgets.dart';
+import 'package:mad_project/models/models.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

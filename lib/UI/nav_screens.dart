@@ -21,11 +21,11 @@ class _NavScreenState extends State<NavScreen> {
   ];
     final List<IconData> _icons = const [
 //    Icons.flag,
-    Icons.home,
       Icons.person,
+      Icons.home,
       MdiIcons.plus,
-    Icons.people,
-    Icons.event,
+      Icons.people,
+      Icons.event,
 
   ];
 

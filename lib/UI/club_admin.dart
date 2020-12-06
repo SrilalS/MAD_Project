@@ -1,10 +1,10 @@
-import 'package:cplustraining/widgets/admin_post.dart';
+import 'package:mad_project/widgets/admin_post.dart';
 import 'package:flutter/material.dart';
-import 'package:cplustraining/config/palette.dart';
-import 'package:cplustraining/data/data.dart';
+import 'package:mad_project/config/palette.dart';
+import 'package:mad_project/data/data.dart';
 
-import 'package:cplustraining/widgets/widgets.dart';
-import 'package:cplustraining/models/models.dart';
+import 'package:mad_project/widgets/widgets.dart';
+import 'package:mad_project/models/models.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -33,6 +33,13 @@ class _AdminPageState extends State<AdminPage> {
               ),
               centerTitle: false,
               floating: true,
+              actions: [
+                IconButton(icon:Icon(Icons.send) ,
+                    color: Colors.purple,
+                    onPressed: (){
+                  print("send notification");
+                    }),
+              ],
 
             ),
 //            SliverToBoxAdapter(

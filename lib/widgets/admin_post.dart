@@ -1,6 +1,6 @@
 
-import 'package:cplustraining/models/models.dart';
-import 'package:cplustraining/widgets/profile_avatar.dart';
+import 'package:mad_project/models/models.dart';
+import 'package:mad_project/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
