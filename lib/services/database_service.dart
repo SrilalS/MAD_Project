@@ -12,4 +12,7 @@ class DatabaseService {
     var options = SetOptions(merge: true);
     return _db.collection('post').doc(post.caption).set(post.toMap(),options);
   }
+  Future<void> deletePost(String postId){
+    return _db.collection('post').doc(postId).delete();
+  }
 }
