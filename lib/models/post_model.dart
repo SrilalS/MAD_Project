@@ -20,4 +20,26 @@ class Post {
     @required this.comments,
     @required this.shares,
   });
+
+  static fromJson(Map<String, dynamic> json) {
+    return Post(
+        user: json['user'],
+        caption: json['caption'],
+        timeAgo: json['timeAgo'],
+        imageUrl: json['imageUrl'],
+        likes: json['likes'],
+        comments: json['comments'],
+        shares: json['shares']);
+  }
+  Map<String, dynamic > toMap(){
+    return{
+      'user':user,
+      'caption':caption,
+      'timeAgo':timeAgo,
+      'imageUrl':imageUrl,
+      'likes':likes,
+      'comments':comments,
+      'shares':shares
+    };
+  }
 }

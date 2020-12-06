@@ -16,6 +16,6 @@ class ClubsPlus extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: NavScreen(),
-    );
+    );   
   }
 }
