@@ -46,14 +46,14 @@ class _AdminPageState extends State<AdminPage> {
 //              child:CreatePostContainer(currentUser:currentUser),
 //            ),
 
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index){
-                final Post post = posts[index];
-                return AdminPost(post:post);
-              },
-                childCount: posts.length,
-              ),
-            )
+//            SliverList(
+//              delegate: SliverChildBuilderDelegate((context, index){
+//                final Post post = posts[index];
+//                return AdminPost(post:post);
+//              },
+//                childCount: posts.length,
+//              ),
+//            )
           ]
       ),
     );

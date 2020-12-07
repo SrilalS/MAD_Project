@@ -44,14 +44,14 @@ class _ClubPageState extends State<ClubPage> {
           child:ClubHeader(currentUser:currentUser),
         ),
 
-      SliverList(
-        delegate: SliverChildBuilderDelegate((context, index){
-          final Post post = posts[index];
-          return ClubPostContainer(post:post);       
-          },
-          childCount: posts.length,
-          ),
-        )
+//      SliverList(
+//        delegate: SliverChildBuilderDelegate((context, index){
+//          final Post post = posts[index];
+//          return ClubPostContainer(post:post);
+//          },
+//          childCount: posts.length,
+//          ),
+//        )
         ]
       ),
     );

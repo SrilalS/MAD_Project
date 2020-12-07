@@ -56,24 +56,24 @@ class _postHeader  extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        ProfileAvatar(imageUrl: post.user.imageUrl),
+//        ProfileAvatar(imageUrl: post.user.imageUrl),
         const SizedBox(width:8.0),
         Expanded(
             child:   Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(post.user.name,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w600
-                  ),
-                ),
+//                Text(post.user.name,
+//                  style: const TextStyle(
+//                      fontWeight: FontWeight.w600
+//                  ),
+//                ),
                 Row(
                   children: <Widget>[
-                    Text('${post.timeAgo} .',
-                      style:  TextStyle(color: Colors.grey[600],
-                          fontSize: 12.0
-                      ),
-                    ),
+//                    Text('${post.timeAgo} .',
+//                      style:  TextStyle(color: Colors.grey[600],
+//                          fontSize: 12.0
+//                      ),
+//                    ),
                     Icon(Icons.public,
                         color: Colors.grey[600],
                         size: 12.0

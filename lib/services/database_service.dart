@@ -3,9 +3,10 @@ import 'package:mad_project/models/post_model.dart';
 
 class DatabaseService {
   FirebaseFirestore _db = FirebaseFirestore.instance;
+//   FirebaseFirestore reference = FirebaseFirestore.instance;
 
   Stream<List<Post>> getPost() {
-    return _db.collection('Clubs').doc().collection('ClubList').doc().collection('Post').snapshots().map((snapshot) =>
+    return _db.collection('clubCats').doc('tj1oBjFYatSBXnzUaKeI').collection('ClubList').doc().collection('Post').snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
   }
   Future<void> setPost(Post post){
@@ -15,4 +16,26 @@ class DatabaseService {
   Future<void> deletePost(String postId){
     return _db.collection('post').doc(postId).delete();
   }
+  Stream<List<Post>> get transports{
+    return _db.collection('clubCats').doc().collection('ClubList').doc().collection('Post').snapshots().map(_transportListFromSnapshots);
+
+  }
+  Stream<List<Post>> getPostfromPostCollection() {
+    return _db.collection('Posts').snapshots().map((snapshot) =>
+        snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
+  }
+
+  List<Post> _transportListFromSnapshots(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
+      return Post(
+        caption: doc.data()["caption"] ?? '',
+        imageUrl: doc.data()["imageUrl"] ??'',
+      );
+
+    }).toList();
+
+
+  }
+
 }
+
