@@ -8,23 +8,38 @@ class ClubList extends StatefulWidget {
 
 class _ClubListState extends State<ClubList> {
 
+
+ 
   FirebaseFirestore fDB = FirebaseFirestore.instance;
+  @override
+  void initState(){
+  
+    super.initState();
+  
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title:Text("test"),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+      ),
       body: Column(
         children:[
           Expanded(
             flex:1,
             child: StreamBuilder(
-              stream: fDB.collection('Clubs').snapshots(),
+              stream: fDB.collection('clubCats').snapshots(),
               builder: (context, clubCats){
                 return ListView.builder(
                   itemCount: clubCats.data.documents.length,
-                  itemBuilder: (_, int index){
+                  itemBuilder: (context, int index){
                     return ListTile(
-                      title: clubCats.data.documents[index]['Name'],
+                      onTap: (){},
+                      title: Text(clubCats.data.documents[index]['Name'].toString()),
+                      
                     );
                   },
                 );
