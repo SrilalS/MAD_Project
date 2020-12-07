@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mad_project/providers/post_provider.dart';
+import 'package:mad_project/services/database_service.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/data/data.dart';
@@ -36,7 +38,7 @@ class HomeScreen extends StatelessWidget {
 //
       SliverList(
         delegate: SliverChildBuilderDelegate((context, index){
-          final Post post = posts[index];
+          final Post post = PostProvider();
           return PostContainer(post:post);       
           },
           childCount: posts.length,

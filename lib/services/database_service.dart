@@ -5,7 +5,7 @@ class DatabaseService {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<List<Post>> getPost() {
-    return _db.collection('').snapshots().map((snapshot) =>
+    return _db.collection('Clubs').doc().collection('ClubList').doc().collection('Post').snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
   }
   Future<void> setPost(Post post){
