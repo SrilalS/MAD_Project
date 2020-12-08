@@ -62,9 +62,8 @@ class _ClubListState extends State<ClubList> {
                                 title: Text(clubCats.data.documents[index]['Name'].toString()   ),
                             
                             ),
-                              FlatButton(onPressed:(){},
-                             child:Text("view")
-                             )
+                            
+                             
 
                             ]
                           ),
