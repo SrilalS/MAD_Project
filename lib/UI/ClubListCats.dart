@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,17 +41,24 @@ class _ClubListCatsState extends State<ClubListCats> {
                   itemCount: clubCats.data.documents.length,
                   itemBuilder: (context, int index){
                     return Container(
-                        height:150,
+                       margin:const EdgeInsets.all(8),
+                        height:155,
                         child: Card(
+                          elevation: 8,
                           child: InkWell(
                             onTap: (){},
                           child: Stack(
                             alignment: AlignmentDirectional.bottomEnd,
                             children: [
-
+                             CachedNetworkImage(
+                              fit: BoxFit.fitWidth,
+                               width:Get.width,
+                               imageUrl:clubCats.data.documents[index]['image'].toString() ,
+                             ),
+                          
                               Container(
                                 width:Get.width,
-                                height: 45,
+                                height:45,
                                 color: Colors.blue.withOpacity(0.25),
 
                               ),
