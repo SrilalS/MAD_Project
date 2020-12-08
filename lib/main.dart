@@ -7,6 +7,7 @@ import 'package:mad_project/UI/ClubListCats.dart';
 
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
    await Firebase.initializeApp();
   runApp(ClubsPlus());
 }
@@ -20,7 +21,7 @@ class ClubsPlus extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: ClubList(),
+      home: ClubListCats(),
       
       );
     

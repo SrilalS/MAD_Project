@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mad_project/UI/ClubList.dart';
 
-class ClubList extends StatefulWidget {
+class ClubListCats extends StatefulWidget {
   @override
-  _ClubListState createState() => _ClubListState();
+  _ClubListCatsState createState() => _ClubListCatsState();
 }
 
-class _ClubListState extends State<ClubList> {
+class _ClubListCatsState extends State<ClubListCats> {
 
 
  
@@ -22,8 +24,8 @@ class _ClubListState extends State<ClubList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text("test"),
-        backgroundColor: Colors.white,
+        title:Text("Club Category"),
+        backgroundColor: Colors.green,
         elevation: 0.0,
       ),
       body: Column(
@@ -33,18 +35,55 @@ class _ClubListState extends State<ClubList> {
             child: StreamBuilder(
               stream: fDB.collection('clubCats').snapshots(),
               builder: (context, clubCats){
-                return ListView.builder(
+                if (clubCats.data != null){
+                     return ListView.builder(
                   itemCount: clubCats.data.documents.length,
                   itemBuilder: (context, int index){
-                    return ListTile(
-                      onTap: (){},
-                      title: Text(clubCats.data.documents[index]['Name'].toString()),
-                      
+                    return Container(
+                        height:150,
+                        child: Card(
+                          child: InkWell(
+                            onTap: (){},
+                          child: Stack(
+                            alignment: AlignmentDirectional.bottomEnd,
+                            children: [
+
+                              Container(
+                                width:Get.width,
+                                height: 45,
+                                color: Colors.blue.withOpacity(0.25),
+
+                              ),
+
+                              ListTile(
+                                title: Text(clubCats.data.documents[index]['Name'].toString()   ),
+                            
+                            ),
+                              FlatButton(onPressed:(){
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ClubList(ID: clubCats.data.documents[index]['ID'].toString() ,)
+                                  ));
+                              },
+                             child:Text("view")
+                             )
+
+                            ]
+                          ),
+                        )
+                    ),
+                
+
+                                      
                     );
                   },
                 );
+              }else{
+               return  Center(
+                 child: CircularProgressIndicator(),
+                );
+              }
               },
-            )
+            ),
             )
         ]
       ),
