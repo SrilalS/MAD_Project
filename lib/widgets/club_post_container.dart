@@ -8,10 +8,16 @@ import 'package:mad_project/models/models.dart';
 import 'package:mad_project/widgets/profile_avatar.dart';
 
 class ClubPostContainer extends StatelessWidget {
-  final Post post;
+  final String caption;
+  final String imageUrl;
+  final String clubImage;
+  final String clubName;
+
+  const ClubPostContainer({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName}) : super(key: key);
 
 
-  const ClubPostContainer({Key key,@required this.post}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,18 +31,18 @@ class ClubPostContainer extends StatelessWidget {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          _postHeader(post: post),
+          _postHeader( clubImage: clubImage,clubName: clubName,),
           const SizedBox(height: 4.0,),
-          Text(post.caption),
-          post.imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
+          Text(caption),
+          imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
 
         ],
       ),
         ),
-        post.imageUrl != null ? 
+        imageUrl != null ?
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Image.network(post.imageUrl),
+          child: Image.network(imageUrl),
           // CachedNetworkImage(imageUrl: post.imageUrl),
           )
        
@@ -53,9 +59,12 @@ class ClubPostContainer extends StatelessWidget {
 }
 
 class _postHeader  extends StatelessWidget {
-  final Post post;
+  final String clubImage;
+  final String clubName;
 
-  const _postHeader({Key key,@required this.post}) : super(key: key);
+  const _postHeader({Key key, this.clubImage, this.clubName}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -66,11 +75,11 @@ class _postHeader  extends StatelessWidget {
           child:   Column(
             crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-//            Text(post.user.name,
-//            style: const TextStyle(
-//              fontWeight: FontWeight.w600
-//            ),
-//            ),
+            Text(clubName,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600
+            ),
+            ),
             Row(
               children: <Widget>[
 //                Text('${post.timeAgo} .',

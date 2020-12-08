@@ -47,7 +47,7 @@ class PostContainer extends StatelessWidget {
        
         : const SizedBox.shrink(),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: _postStats(),
+        child: _postStats(clubName: clubName,),
         )
         ],
       ) 
@@ -108,8 +108,10 @@ class _postHeader  extends StatelessWidget {
 }
 
 class _postStats extends StatelessWidget {
-//  final Post post;
-//  final String captiion;
+
+  final String clubName;
+
+  const _postStats({Key key, this.clubName}) : super(key: key);
 //  final String imageUrl;
 //
 //  const _postStats({Key key, this.captiion, this.imageUrl}) : super(key: key);
@@ -135,7 +137,7 @@ class _postStats extends StatelessWidget {
             onPressed: () {
                Navigator.push(context,
             MaterialPageRoute(
-        builder:(context) => ClubPage()
+        builder:(context) => ClubPage(clubName: clubName,)
          ),);
              
             },

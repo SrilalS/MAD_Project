@@ -24,6 +24,10 @@ class DatabaseService {
     return _db.collection('Posts').snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
   }
+  Stream<List<Post>> getPostfromclubName(String clubName) {
+    return _db.collection('Posts').where('clubName',isEqualTo: clubName).snapshots().map((snapshot) =>
+        snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
+  }
 
   List<Post> _transportListFromSnapshots(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
