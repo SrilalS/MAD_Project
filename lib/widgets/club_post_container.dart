@@ -69,7 +69,7 @@ class _postHeader  extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-//        ProfileAvatar(imageUrl: post.user.imageUrl),
+        ProfileAvatar(imageUrl: clubImage),
         const SizedBox(width:8.0),
         Expanded(
           child:   Column(
