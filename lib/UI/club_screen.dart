@@ -45,26 +45,33 @@ class _ClubPageState extends State<ClubPage> {
             ),
           ),
       ) ,
-      
-      body:
-        //  ClubPage(),
-          StreamBuilder<List<Post>>(
-            stream: DatabaseService().getPostfromclubName(clubName),
-            builder: (context,snapshot){
-              return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context,index){
-                    return ClubPostContainer(
-                      caption: snapshot.data[index].caption,
-                      imageUrl: snapshot.data[index].imageUrl,
-                      clubImage: snapshot.data[index].clubImage,
-                      clubName: snapshot.data[index].clubName,
-                    );
-                  }
-              );
-            },
-          ),
-        
+
+        body: Column(
+          children: [
+            ClubHeader(),
+            Expanded(
+              flex: 1,
+              child: StreamBuilder<List<Post>>(
+                stream: DatabaseService().getPostfromclubName(clubName),
+                builder: (context,snapshot){
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context,index){
+                        return ClubPostContainer(
+                          caption: snapshot.data[index].caption,
+                          imageUrl: snapshot.data[index].imageUrl,
+                          clubImage: snapshot.data[index].clubImage,
+                          clubName: snapshot.data[index].clubName,
+                        );
+                      }
+                  );
+                },
+              ),
+            )
+          ],
+        )
+
+
 
 
 

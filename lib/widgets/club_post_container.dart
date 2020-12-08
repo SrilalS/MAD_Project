@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mad_project/UI/club_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mad_project/widgets/club_header.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/data/data.dart';
@@ -48,7 +49,7 @@ class ClubPostContainer extends StatelessWidget {
        
         : const SizedBox.shrink(),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        // child: _postStats(post:post),
+//         child: ClubHeader(),
         )
         ],
       ) 

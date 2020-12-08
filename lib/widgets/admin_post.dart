@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AdminPost extends StatelessWidget {
-  final Post post;
+  final String caption;
+  final String imageUrl;
+  final String clubImage;
+  final String clubName;
 
-  const AdminPost({Key key, this.post}) : super(key: key);
+  const AdminPost({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,24 +26,24 @@ class AdminPost extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  _postHeader(post: post),
+                  _postHeader(clubName: clubName,clubImage: clubImage,),
                   const SizedBox(height: 4.0,),
-                  Text(post.caption),
-                  post.imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
+                  Text(caption),
+                  imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
 
                 ],
               ),
             ),
-            post.imageUrl != null ?
+            imageUrl != null ?
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Image.network(post.imageUrl),
+              child: Image.network(imageUrl),
               // CachedNetworkImage(imageUrl: post.imageUrl),
             )
 
                 : const SizedBox.shrink(),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: _postStats(post:post),
+              child: _postStats(),
             )
           ],
         )
@@ -49,24 +54,25 @@ class AdminPost extends StatelessWidget {
 }
 
 class _postHeader  extends StatelessWidget {
-  final Post post;
+  final String clubImage;
+  final String clubName;
 
-  const _postHeader({Key key,@required this.post}) : super(key: key);
+  const _postHeader({Key key, this.clubImage, this.clubName}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-//        ProfileAvatar(imageUrl: post.user.imageUrl),
+       ProfileAvatar(imageUrl: clubImage),
         const SizedBox(width:8.0),
         Expanded(
             child:   Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-//                Text(post.user.name,
-//                  style: const TextStyle(
-//                      fontWeight: FontWeight.w600
-//                  ),
-//                ),
+                Text(clubName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600
+                  ),
+                ),
                 Row(
                   children: <Widget>[
 //                    Text('${post.timeAgo} .',
@@ -90,9 +96,7 @@ class _postHeader  extends StatelessWidget {
 }
 
 class _postStats extends StatelessWidget {
-  final Post post;
 
-  const _postStats({Key key,@required this.post}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
