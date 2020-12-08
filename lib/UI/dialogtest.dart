@@ -7,47 +7,6 @@ class Dtest extends StatefulWidget {
 }
 
 class _DtestState extends State<Dtest> {
-  void dialogTest() {
-    Get.dialog(AlertDialog(
-        title: Text('Edit Club Details'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Club Name', border: OutlineInputBorder()),
-              ),
-              SizedBox(height: 24),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Description', border: OutlineInputBorder()),
-              ),
-              SizedBox(height: 24),
-              TextField(
-                decoration: InputDecoration(
-                    labelText: 'Club Logo', border: OutlineInputBorder()),
-              ),
-              SizedBox(height: 8),
-              SizedBox(height: 32),
-              Container(
-                height: 48,
-                width: Get.width,
-                child: RaisedButton(
-                  padding: const EdgeInsets.all(8.0),
-                  textColor: Colors.white,
-                  color: Colors.blueGrey[400],
-                  child: new Text("ADD"),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100)),
-                  onPressed: () {},
-                ),
-              )
-            ],
-          ),
-        )));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,10 +21,74 @@ class _DtestState extends State<Dtest> {
           color: Colors.blueGrey[600],
           child: new Text("Edit"),
           onPressed: () {
-            dialogTest();
+            dialogTest("drama", "description2",
+                'https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png');
           },
         ),
       ),
     );
+  }
+
+  void dialogTest(
+    String clubName,
+    String description,
+    String imageUrl,
+  ) {
+    Get.dialog(AlertDialog(
+        title: Text(
+          'Edit Club Details',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                  width: Get.width, height: 50, child: Image.network(imageUrl)),
+              TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    clubName = value;
+                  });
+                },
+                initialValue: clubName,
+                decoration: InputDecoration(
+                    hintText: clubName,
+                    labelText: 'Club Name',
+                    border: OutlineInputBorder()),
+              ),
+              SizedBox(height: 24),
+              TextFormField(
+                initialValue: description,
+                decoration: InputDecoration(
+                    hintText: description,
+                    labelText: "Description",
+                    border: OutlineInputBorder()),
+                onChanged: (value) {
+                  setState(() {
+                    description = value;
+                  });
+                },
+              ),
+              SizedBox(height: 8),
+              SizedBox(height: 32),
+              Container(
+                height: 48,
+                width: Get.width,
+                child: RaisedButton(
+                  padding: const EdgeInsets.all(8.0),
+                  textColor: Colors.white,
+                  color: Colors.blueGrey[400],
+                  child: new Text("ADD"),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100)),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              )
+            ],
+          ),
+        )));
   }
 }

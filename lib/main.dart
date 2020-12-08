@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mad_project/UI/Home.dart';
+import 'package:mad_project/UI/dialogtest.dart';
 import 'package:mad_project/UI/event_screens.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class ClubsPlus extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: EventPage(),
+      home: Dtest(),
     );
   }
 }
