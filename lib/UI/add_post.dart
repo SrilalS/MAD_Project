@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mad_project/UI/club_admin.dart';
 import 'package:mad_project/UI/nav_screens.dart';
+import 'package:mad_project/widgets/loading.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,10 +27,11 @@ class _AddPostState extends State<AddPost> {
  String clubImage;
  String clubName;
  DateTime date;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.blue[100],
       appBar:AppBar(
         elevation: 0.0,
@@ -99,7 +101,8 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                         onPressed: () async{
-                            uploadImage();
+
+                           uploadImage();
                         }
                     ),
 
@@ -117,12 +120,18 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                         onPressed: () async{
-                                  DatabaseService().setPost(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+                          if(caption != null || imageUrl != null){
+                            DatabaseService().setPost(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
 
-                                  Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder:(context) => NavScreen()
-                                    ),);
+                            Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder:(context) => NavScreen()
+                              ),);
+                          }
+                          else{
+                            error = "Add caption or image";
+                          }
+
 
                         }
                     ),

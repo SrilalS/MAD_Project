@@ -90,6 +90,7 @@ class _AddEventPageState extends State<AddEventPage> {
                           ),
                         ),
                         onPressed: () async{
+
                           uploadImage();
                         }
                     ),
@@ -108,12 +109,18 @@ class _AddEventPageState extends State<AddEventPage> {
                           ),
                         ),
                         onPressed: () async{
-                          DatabaseService().setEvent(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+                          if(caption != null || imageUrl != null){
+                            DatabaseService().setEvent(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
 
-                          Navigator.push(context,
-                            MaterialPageRoute(
-                                builder:(context) => NavScreen()
-                            ),);
+                            Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder:(context) => NavScreen()
+                              ),);
+                          }
+                          else{
+                            error = "Add caption or image";
+                          }
+
 
                         }
                     ),

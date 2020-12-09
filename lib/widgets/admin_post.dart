@@ -32,7 +32,7 @@ class AdminPost extends StatelessWidget {
                   _postHeader(clubName: clubName,clubImage: clubImage,),
                   const SizedBox(height: 4.0,),
                   Text(caption),
-             
+
                   imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
 
                 ],
