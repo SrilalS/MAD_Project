@@ -103,7 +103,7 @@ class _AddPostState extends State<AddPost> {
                     SizedBox(height: 20.0),
                     (imageUrl != null)
                         ? Image.network(imageUrl)
-                        : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity),
+                        : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
                     SizedBox(height: 20.0),
                     RaisedButton(
                         color: Colors.blue[700],
@@ -152,7 +152,7 @@ class _AddPostState extends State<AddPost> {
       if (image != null){
         //Upload to Firebase
         var snapshot = await _storage.ref()
-            .child("productImage/image1" + DateTime.now().toString())
+            .child("postImage/image1" + DateTime.now().toString())
             .putFile(file) ;
         // .onComplete;
 
