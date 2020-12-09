@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mad_project/UI/club_admin.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uuid/uuid.dart';
 
 class AddPost extends StatefulWidget {
   @override
@@ -114,6 +116,12 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                         onPressed: () async{
+                                  DatabaseService().setPost(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+
+                                  Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder:(context) => AdminPage()
+                                    ),);
 
                         }
                     ),
@@ -133,6 +141,7 @@ class _AddPostState extends State<AddPost> {
       ),
     );
   }
+
   uploadImage() async {
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();

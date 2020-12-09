@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 
-class User {
+class Users {
   final String name;
   final String imageUrl;
 
-  const User({
+  const Users({
     @required this.name,
     @required this.imageUrl,
   });
