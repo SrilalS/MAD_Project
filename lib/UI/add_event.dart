@@ -160,7 +160,7 @@ class _AddEventPageState extends State<AddEventPage> {
       if (image != null){
         //Upload to Firebase
         var snapshot = await _storage.ref()
-            .child("postImage/image1" + DateTime.now().toString())
+            .child("EventImage/image1" + DateTime.now().toString())
             .putFile(file) ;
         // .onComplete;
 
