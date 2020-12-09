@@ -1,4 +1,5 @@
 
+import 'package:mad_project/UI/edit_post.dart';
 import 'package:mad_project/models/models.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:mad_project/widgets/profile_avatar.dart';
@@ -46,7 +47,13 @@ class AdminPost extends StatelessWidget {
 
                 : const SizedBox.shrink(),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: _postStats(postId: postId,),
+              child: _postStats(
+                caption: caption,
+                imageUrl: imageUrl,
+                clubImage: clubImage,
+                clubName: clubName,
+                postId: postId,
+              ),
             )
           ],
         )
@@ -99,9 +106,13 @@ class _postHeader  extends StatelessWidget {
 }
 
 class _postStats extends StatelessWidget {
+  final String caption;
+  final String imageUrl;
+  final String clubImage;
+  final String clubName;
   final String postId;
 
-  const _postStats({Key key, this.postId}) : super(key: key);
+  const _postStats({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +121,7 @@ class _postStats extends StatelessWidget {
         Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+
             Container(
 
               width: 50,
@@ -125,8 +137,9 @@ class _postStats extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context,
                     MaterialPageRoute(
-                        builder:(context) => null
+                        builder:(context) => EditPostPage(clubName: clubName,imageUrl: imageUrl,clubImage: clubImage,postId: postId,caption: caption,)
                     ),);
+
 
                 },
                 child:Align(

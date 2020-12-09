@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:mad_project/UI/event_screen.dart';
 import 'package:mad_project/models/joinform_model.dart';
 // import 'package:mad_project/screens/event_screen.dart';
 import 'package:mad_project/UI/home_screen.dart';
@@ -9,9 +10,9 @@ import 'package:mad_project/models/models.dart';
 import 'package:mad_project/widgets/profile_avatar.dart';
 
 class ClubHeader extends StatelessWidget {
-  final User currentUser;
-  const ClubHeader({Key key, this.currentUser}) : super(key: key);
+ final String clubName;
 
+  const ClubHeader({Key key, this.clubName}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +30,8 @@ class ClubHeader extends StatelessWidget {
             child:  Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
-              FlatButton.icon(onPressed: () {
+              FlatButton.icon(
+                  onPressed: () {
                  Navigator.push(context,
             MaterialPageRoute(
         builder:(context) => HomeScreen()
@@ -56,17 +58,18 @@ class ClubHeader extends StatelessWidget {
                 width:8.0
               ),
                   FlatButton.icon(onPressed: () {
-        //                      Navigator.push(context,
-        //     MaterialPageRoute(
-        // builder:(context) => EventPage()
-        //  ),);
+                              Navigator.push(context,
+             MaterialPageRoute(
+         builder:(context) => EventPage(clubName:clubName)
+          ),);
                   }, 
               icon: const Icon(Icons.flare, color: Colors.purple,), 
               label: Text("Events")
               ),
               const VerticalDivider(
                 width:8.0
-              )
+              ),
+
             ]
           )
           )

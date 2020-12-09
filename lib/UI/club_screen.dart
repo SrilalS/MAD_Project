@@ -48,7 +48,7 @@ class _ClubPageState extends State<ClubPage> {
 
         body: Column(
           children: [
-            ClubHeader(),
+            ClubHeader(clubName: clubName,),
             Expanded(
               flex: 1,
               child: StreamBuilder<List<Post>>(
