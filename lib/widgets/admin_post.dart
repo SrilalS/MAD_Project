@@ -1,5 +1,6 @@
 
 import 'package:mad_project/models/models.dart';
+import 'package:mad_project/services/database_service.dart';
 import 'package:mad_project/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -9,8 +10,9 @@ class AdminPost extends StatelessWidget {
   final String imageUrl;
   final String clubImage;
   final String clubName;
+  final String postId;
 
-  const AdminPost({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName}) : super(key: key);
+  const AdminPost({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId}) : super(key: key);
 
 
   @override
@@ -29,6 +31,7 @@ class AdminPost extends StatelessWidget {
                   _postHeader(clubName: clubName,clubImage: clubImage,),
                   const SizedBox(height: 4.0,),
                   Text(caption),
+                  Text(postId),
                   imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
 
                 ],
@@ -43,7 +46,7 @@ class AdminPost extends StatelessWidget {
 
                 : const SizedBox.shrink(),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: _postStats(),
+              child: _postStats(postId: postId,),
             )
           ],
         )
@@ -96,6 +99,9 @@ class _postHeader  extends StatelessWidget {
 }
 
 class _postStats extends StatelessWidget {
+  final String postId;
+
+  const _postStats({Key key, this.postId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +131,7 @@ class _postStats extends StatelessWidget {
                 },
                 child:Align(
                   alignment: Alignment.center,
-                  child:const Icon(MdiIcons.commentEdit, size: 18,color: Colors.blue,),
+                  child:const Icon(Icons.edit, size: 18,color: Colors.blue,),
                 )
 
 
@@ -148,11 +154,9 @@ class _postStats extends StatelessWidget {
                   color: Colors.white,
                   elevation: 0,
                   onPressed: () {
-                    Navigator.push(context,
-                      MaterialPageRoute(
-                          builder:(context) => null
-                      ),);
 
+                    DatabaseService().deletePost(postId);
+                    print(postId);
                   },
                   child:Align(
                     alignment: Alignment.center,

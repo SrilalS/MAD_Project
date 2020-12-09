@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mad_project/UI/club_admin.dart';
+import 'package:mad_project/UI/nav_screens.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -42,7 +43,7 @@ class _AddPostState extends State<AddPost> {
         brightness: Brightness.light,
         backgroundColor: Colors.white,
         title: Text(
-          'Join Club',
+          'Add Post',
           style: const TextStyle(
             color:Palette.nsbmgreen,
             fontSize: 28.0,
@@ -66,7 +67,7 @@ class _AddPostState extends State<AddPost> {
         decoration: BoxDecoration(
             color: Colors.white,
 
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(80.0), bottomRight: Radius.circular(60) )
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(130.0), )
         ),
         child: ListView(
           primary: false,
@@ -120,7 +121,7 @@ class _AddPostState extends State<AddPost> {
 
                                   Navigator.push(context,
                                     MaterialPageRoute(
-                                        builder:(context) => AdminPage()
+                                        builder:(context) => NavScreen()
                                     ),);
 
                         }
