@@ -44,8 +44,33 @@ class DatabaseService {
 
     );
   }
+  Future<void> setEvent(
+      String caption,
+      String imageUrl,
+      String clubId,
+      String postId,
+      String clubImage,
+      String clubName,
+      DateTime date
+      ){
+
+    return _db.collection('Events').doc(postId).set({
+      "caption":caption,
+      "imageUrl":imageUrl,
+      "clubId":clubId,
+      "postId":postId,
+      "clubImage":clubImage,
+      "clubName":clubName,
+      "date":date,
+    }
+
+    );
+  }
   Future<void> deletePost(String postId){
     return _db.collection('Posts').doc(postId).delete();
+  }
+  Future<void> deleteEvent(String postId){
+    return _db.collection('Events').doc(postId).delete();
   }
 
   Stream<List<Post>> getPostfromPostCollection() {
@@ -57,7 +82,7 @@ class DatabaseService {
         snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
   }
   Stream<List<Post>> getEventfromclubName(String clubName) {
-    return _db.collection('Posts').where('clubName',isEqualTo: clubName).snapshots().map((snapshot) =>
+    return _db.collection('Events').where('clubName',isEqualTo: clubName).snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
   }
 
