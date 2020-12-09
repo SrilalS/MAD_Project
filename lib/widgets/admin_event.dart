@@ -140,7 +140,7 @@ class _postStats extends StatelessWidget {
                           builder:(context) => EditEventPage(postId,clubImage,clubName,caption,imageUrl)
                       ),);
 
-         
+
                   },
                   child:Align(
                     alignment: Alignment.center,
