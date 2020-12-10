@@ -63,7 +63,13 @@ class _ClubListState extends State<ClubList> {
                             
                             ),
                             
-                             
+                              FlatButton(onPressed:(){
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ClubList(ID: clubCats.data.documents[index]['ID'].toString() ,)
+                                  ));
+                              },
+                             child:Text("view")
+                             )
 
                             ]
                           ),

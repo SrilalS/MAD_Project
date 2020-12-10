@@ -28,9 +28,7 @@ class _AuthState extends State<Auth> {
       body: SafeArea(
         child: Column(
           children: [
-            RaisedButton(
-              
-            )
+            RaisedButton()
           ],
         ),
       ),
