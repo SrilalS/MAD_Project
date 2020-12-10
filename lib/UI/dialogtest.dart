@@ -21,7 +21,7 @@ class _DtestState extends State<Dtest> {
           color: Colors.blueGrey[600],
           child: new Text("Edit"),
           onPressed: () {
-            dialogTest("drama", "description2",
+            dialogTest("Drama Club", "Hello Drama Club",
                 'https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png');
           },
         ),
@@ -70,7 +70,7 @@ class _DtestState extends State<Dtest> {
                   });
                 },
               ),
-              SizedBox(height: 8),
+             ,
               SizedBox(height: 32),
               Container(
                 height: 48,
@@ -83,7 +83,8 @@ class _DtestState extends State<Dtest> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100)),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Get.to()
+                    // Navigator.pop(context);
                   },
                 ),
               )
