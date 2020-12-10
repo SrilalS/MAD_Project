@@ -70,7 +70,6 @@ class _DtestState extends State<Dtest> {
                   });
                 },
               ),
-             ,
               SizedBox(height: 32),
               Container(
                 height: 48,
@@ -83,7 +82,6 @@ class _DtestState extends State<Dtest> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100)),
                   onPressed: () {
-                    Get.to()
                     // Navigator.pop(context);
                   },
                 ),
