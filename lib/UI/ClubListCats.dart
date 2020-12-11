@@ -46,20 +46,26 @@ class _ClubListCatsState extends State<ClubListCats> {
                         child: Card(
                           elevation: 8,
                           child: InkWell(
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ClubList(ID: clubCats.data.documents[index]['ID'].toString() ,)
+                                  ));
+                            },
                           child: Stack(
                             alignment: AlignmentDirectional.bottomEnd,
                             children: [
+                             // Image.network(clubCats.data.documents[index]['image'].toString()),
                              CachedNetworkImage(
                               fit: BoxFit.fitWidth,
                                width:Get.width,
+                               height: Get.height,
                                imageUrl:clubCats.data.documents[index]['image'].toString() ,
                              ),
                           
                               Container(
                                 width:Get.width,
                                 height:45,
-                                color: Colors.blue.withOpacity(0.25),
+                                color: Colors.white.withOpacity(1),
 
                               ),
 

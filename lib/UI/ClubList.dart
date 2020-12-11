@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:mad_project/UI/ViewClub.dart';
+
 
 class ClubList extends StatefulWidget {
  
@@ -41,21 +43,25 @@ class _ClubListState extends State<ClubList> {
                         height:150,
                         child: Card(
                           child: InkWell(
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) =>ViewClub(clubName: 'Dancing Club',description: 'Description',) ,
+                                  ));
+                            },
                           child: Stack(
                             alignment: AlignmentDirectional.bottomEnd,
                             children: [
                                CachedNetworkImage(
                               fit: BoxFit.fitWidth,
                                width:Get.width,
+                               height: Get.height,
                                imageUrl:clubCats.data.documents[index]['image'].toString() ,
                              ),
 
                               Container(
                                 width:Get.width,
-                                height: 45,
-                                color: Colors.blue.withOpacity(0.25),
-
+                                height:45,
+                                color: Colors.white.withOpacity(1),
                               ),
 
                               ListTile(
@@ -64,8 +70,8 @@ class _ClubListState extends State<ClubList> {
                             ),
                             
                               FlatButton(onPressed:(){
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ClubList(ID: clubCats.data.documents[index]['ID'].toString() ,)
+                                 Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ViewClub(clubName: 'Dancing Club',description: 'Description',) ,
                                   ));
                               },
                              child:Text("view")
