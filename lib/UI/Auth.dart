@@ -41,9 +41,9 @@ class _AuthState extends State<Auth> {
       Get.snackbar(
         'Login Failed!',
         'Login Failed please retry',
-        backgroundColor: Colors.white,
-        shouldIconPulse: true,
-        icon: Icon(Icons.error, color: Colors.red,),
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        icon: Icon(Icons.error, color: Colors.white,),
       );
       setState(() {
         switcher = Text('Login with Google');

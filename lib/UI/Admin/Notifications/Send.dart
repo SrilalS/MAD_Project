@@ -27,7 +27,17 @@ class _SendNotifiState extends State<SendNotifi> {
     //dio.options.baseUrl = 'https://onesignal.com/api/v1/notifications';
     dio.options.headers['content-Type'] = 'application/json';
     dio.options.headers["authorization"] = "Basic YjYwNWFhNGMtNGQxMi00YjNiLWJhNWUtMzE4NWI5ZjcyY2Q3";
-    await dio.post('https://onesignal.com/api/v1/notifications', data: jsonEncode(dataJSON));
+    await dio.post('https://onesignal.com/api/v1/notifications', data: jsonEncode(dataJSON)).then((value){
+      if (value.statusCode != 200){
+        Get.snackbar(
+          'Send Failed!',
+          'Send Failed please retry',
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          icon: Icon(Icons.error, color: Colors.white,),
+        );
+      }
+    });
   }
 
   @override
@@ -37,6 +47,7 @@ class _SendNotifiState extends State<SendNotifi> {
         child: Container(
           padding: const EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Title' , style: titleTexts(Colors.black, FontWeight.normal, 24)),
@@ -68,7 +79,17 @@ class _SendNotifiState extends State<SendNotifi> {
                   color: Colors.blue,
                   textTheme: ButtonTextTheme.primary,
                   onPressed: (){
-                    sendNotification(titleC.text, contentC.text);
+                    if (titleC.text.isEmpty || contentC.text.isEmpty){
+                      Get.snackbar(
+                        'Empty Details!',
+                        'Title or Content Must not be Empty!',
+                        backgroundColor: Colors.redAccent,
+                        colorText: Colors.white,
+                        icon: Icon(Icons.error, color: Colors.white,),
+                      );
+                    } else {
+                      sendNotification(titleC.text, contentC.text);
+                    }
                   },
                 ),
               )
