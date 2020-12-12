@@ -13,6 +13,7 @@ class _SendNotifiState extends State<SendNotifi> {
     dio.options.baseUrl = 'https://onesignal.com/api/v1/notifications';
     dio.options.headers['content-Type'] = 'application/json';
     dio.options.headers["authorization"] = "Basic YjYwNWFhNGMtNGQxMi00YjNiLWJhNWUtMzE4NWI5ZjcyY2Q3";
+    dio
   }
 
   @override
