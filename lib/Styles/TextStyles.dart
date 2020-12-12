@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 TextStyle titleTexts(Color color, FontWeight fontWeight, double fontSize){
   return TextStyle(
@@ -11,5 +12,11 @@ TextStyle titleTexts(Color color, FontWeight fontWeight, double fontSize){
 RoundedRectangleBorder rShapeBorder(double rad){
   return RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(rad)
+  );
+}
+
+OutlineInputBorder outlineIB(){
+  return OutlineInputBorder(
+
   );
 }

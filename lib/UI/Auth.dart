@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 import 'package:mad_project/UI/AuthWidgets/MainLogo.dart';
@@ -13,36 +14,37 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> {
-  Future<UserCredential> signInWithGoogle() async {
-    await Firebase.initializeApp();
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
 
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+  Widget switcher = Text('SignIn With Google');
 
-  //NSBM Sign IN
-
-
-
-  void signInWithNSBM() async {
-    User user = await FirebaseAuthOAuth().openSignInFlow(
-        "microsoft.com",
-        ["email openid"],
-        {
-          'tenant': '9486ac65-39d3-4d25-977c-76d9c31c0046',
-        }
-        );
-  }
-
-  void signOut(){
-    //FirebaseAuth.instance.signOut();
-    print(FirebaseAuth.instance.currentUser.tenantId);
+  void signInWithGoogle() async {
+    setState(() {
+      switcher = Container(
+        child: CircularProgressIndicator(backgroundColor: Colors.white),
+      );
+    });
+    try {
+      GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      GoogleAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      //Get.offAll(Scafolding());
+    } catch (e) {
+      Get.snackbar(
+        'Login Failed!',
+        'Login Failed please retry',
+        backgroundColor: Colors.white,
+        shouldIconPulse: true,
+        icon: Icon(Icons.error, color: Colors.red,),
+      );
+      setState(() {
+        switcher = Text('Login with Google');
+      });
+      print(e);
+    }
   }
 
   @override
@@ -60,24 +62,16 @@ class _AuthState extends State<Auth> {
             mainLogo(),
             Text('Sign In',
                 style: titleTexts(Colors.grey.shade900, FontWeight.bold, 32)),
-            RaisedButton(
-              color: Colors.blue,
-              textTheme: ButtonTextTheme.primary,
-              shape: rShapeBorder(32),
-              onPressed: () {
-                signOut();
-                //signInWithGoogle();
-              },
-              child: Text('Sign in With Google'),
-            ),
-            RaisedButton(
-              color: Colors.blue,
-              textTheme: ButtonTextTheme.primary,
-              shape: rShapeBorder(32),
-              onPressed: () {
-                signInWithNSBM();
-              },
-              child: Text('Sign in With NSBM (Microsoft)'),
+            Container(
+              child: RaisedButton(
+                color: Colors.blue,
+                textTheme: ButtonTextTheme.primary,
+                shape: rShapeBorder(32),
+                child: switcher,
+                onPressed: (){
+                  signInWithGoogle();
+                },
+              ),
             )
           ],
         ),
