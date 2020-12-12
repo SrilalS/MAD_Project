@@ -9,4 +9,8 @@ class StorageController{
     await reference.putString('data');
     return await reference.getDownloadURL();
   }
+
+  Future dLoad(){
+    
+  }
 }
