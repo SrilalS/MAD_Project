@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mad_project/Styles/TextStyles.dart';
 
 class SendNotifi extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class SendNotifi extends StatefulWidget {
 }
 
 class _SendNotifiState extends State<SendNotifi> {
+  TextEditingController titleC = TextEditingController();
+  TextEditingController contentC = TextEditingController();
 
   void sendNotification(String title, String content) async{
     var dataJSON = {
@@ -29,17 +33,49 @@ class _SendNotifiState extends State<SendNotifi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            RaisedButton(
-              onPressed: (){
-                  sendNotification('title', 'content');
-              },
-            )
-          ],
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Title' , style: titleTexts(Colors.black, FontWeight.normal, 24)),
+              TextField(
+                controller: titleC,
+                style: TextStyle(fontSize: 21),
+                decoration: InputDecoration(
+
+                    border: outlineIB()
+                ),
+              ),
+              Text('Content' , style: titleTexts(Colors.black, FontWeight.normal, 24)),
+              TextField(
+                controller: contentC,
+                maxLines: 12,
+                minLines: 2,
+                style: TextStyle(fontSize: 21),
+                decoration: InputDecoration(
+                    border: outlineIB()
+                ),
+              ),
+              SizedBox(height: 16),
+              Container(
+                width: Get.width,
+                height: 48,
+                child: RaisedButton(
+                  shape: rShapeBorder(32),
+                  child: Text('Send'),
+                  color: Colors.blue,
+                  textTheme: ButtonTextTheme.primary,
+                  onPressed: (){
+                    sendNotification(titleC.text, contentC.text);
+                  },
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
