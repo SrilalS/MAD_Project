@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mad_project/Classes/StorageController.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 
 class SendNotifi extends StatefulWidget {
@@ -92,6 +93,13 @@ class _SendNotifiState extends State<SendNotifi> {
                     }
                   },
                 ),
+              ),
+              RaisedButton(
+                onPressed: () async {
+                  StorageController sc = new StorageController();
+                  String xc = await sc.upload('X');
+                  print(xc);
+                },
               )
             ],
           ),
