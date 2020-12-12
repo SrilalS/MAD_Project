@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mad_project/UI/ClubList.dart';
 
 class ViewClub extends StatelessWidget {
 //  final String imagePath;
@@ -33,10 +35,10 @@ class ViewClub extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Color(0xFF00B0FF),
+        backgroundColor: Colors.green,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {Get.back();},
         ),
       ),
       body: Stack(
@@ -125,7 +127,7 @@ class ViewClub extends StatelessWidget {
 class HeaderCurvedContainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Color(0xFF00B0FF);
+    Paint paint = Paint()..color = Colors.green;
     Path path = Path()
       ..relativeLineTo(0, 150)
       ..quadraticBezierTo(size.width / 2, 190, size.width, 150)

@@ -24,7 +24,7 @@ class _ClubListState extends State<ClubList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text("Club Category"),
+        title:Text("Club List"),
         backgroundColor: Colors.green,
         elevation: 0.0,
       ),
@@ -33,7 +33,7 @@ class _ClubListState extends State<ClubList> {
           Expanded(
             flex:1,
             child: StreamBuilder(
-              stream: fDB.collection('clubCats').where('ID',isEqualTo: ID).snapshots(),
+              stream: fDB.collection('clubCats').doc(ID).collection('ClubList').snapshots(),
               builder: (context, clubCats){
                 if (clubCats.data != null){
                      return ListView.builder(
@@ -61,21 +61,21 @@ class _ClubListState extends State<ClubList> {
                               Container(
                                 width:Get.width,
                                 height:45,
-                                color: Colors.white.withOpacity(1),
+                                color: Colors.white.withOpacity(0.9),
                               ),
 
                               ListTile(
-                                title: Text(clubCats.data.documents[index]['Name'].toString()   ),
+                                title: Text(clubCats.data.documents[index]['ClubName'].toString()   ),
                             
                             ),
                             
-                              FlatButton(onPressed:(){
-                                 Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ViewClub(clubName: 'Dancing Club',description: 'Description',) ,
-                                  ));
-                              },
-                             child:Text("view")
-                             )
+                              //FlatButton(onPressed:(){
+                                // Navigator.push(context, MaterialPageRoute(
+                                  //builder: (context) => ViewClub(clubName: 'Dancing Club',description: 'Description',) ,
+                                  //));
+                              //},
+                             //child:Text("view")
+                             //)
 
                             ]
                           ),

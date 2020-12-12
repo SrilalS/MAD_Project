@@ -41,7 +41,7 @@ class _ClubListCatsState extends State<ClubListCats> {
                   itemCount: clubCats.data.documents.length,
                   itemBuilder: (context, int index){
                     return Container(
-                       margin:const EdgeInsets.all(8),
+                       margin:const EdgeInsets.all(9),
                         height:155,
                         child: Card(
                           elevation: 8,
@@ -57,15 +57,15 @@ class _ClubListCatsState extends State<ClubListCats> {
                              // Image.network(clubCats.data.documents[index]['image'].toString()),
                              CachedNetworkImage(
                               fit: BoxFit.fitWidth,
-                               width:Get.width,
-                               height: Get.height,
+                               //width:Get.width,
+                              // height: Get.height,
                                imageUrl:clubCats.data.documents[index]['image'].toString() ,
                              ),
                           
                               Container(
                                 width:Get.width,
                                 height:45,
-                                color: Colors.white.withOpacity(1),
+                                color: Colors.white.withOpacity(0.8),
 
                               ),
 
