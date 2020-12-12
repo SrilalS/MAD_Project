@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class SendNotifi extends StatefulWidget {
@@ -6,6 +7,13 @@ class SendNotifi extends StatefulWidget {
 }
 
 class _SendNotifiState extends State<SendNotifi> {
+
+  void sendNotification(String title, String content){
+    Dio().post(
+      
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
