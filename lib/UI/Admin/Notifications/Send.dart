@@ -8,6 +8,14 @@ class SendNotifi extends StatefulWidget {
 class _SendNotifiState extends State<SendNotifi> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+
+          ],
+        ),
+      ),
+    );
   }
 }

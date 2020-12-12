@@ -20,6 +20,8 @@ class _AuthState extends State<Auth> {
   void signInWithGoogle() async {
     setState(() {
       switcher = Container(
+        height: 28,
+        width: 28,
         child: CircularProgressIndicator(backgroundColor: Colors.white),
       );
     });
@@ -32,6 +34,9 @@ class _AuthState extends State<Auth> {
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
       //Get.offAll(Scafolding());
+      setState(() {
+        switcher = Text('Login with Google');
+      });
     } catch (e) {
       Get.snackbar(
         'Login Failed!',
@@ -55,24 +60,40 @@ class _AuthState extends State<Auth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
           child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             mainLogo(),
-            Text('Sign In',
-                style: titleTexts(Colors.grey.shade900, FontWeight.bold, 32)),
             Container(
-              child: RaisedButton(
-                color: Colors.blue,
-                textTheme: ButtonTextTheme.primary,
-                shape: rShapeBorder(32),
-                child: switcher,
-                onPressed: (){
-                  signInWithGoogle();
-                },
+              height: 128,
+              width: Get.width*0.75,
+              child: Card(
+                shape: rShapeBorder(16),
+                elevation: 4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Sign In',
+                        style: titleTexts(Colors.grey.shade800, FontWeight.bold, 32)),
+                    Container(
+                      child: RaisedButton(
+                        color: Colors.blue,
+                        textTheme: ButtonTextTheme.primary,
+                        shape: rShapeBorder(32),
+                        child: switcher,
+                        onPressed: (){
+                          signInWithGoogle();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )
+            ),
+
           ],
         ),
       )),

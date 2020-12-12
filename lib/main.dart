@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mad_project/UI/Admin/Notifications/Send.dart';
 import 'package:mad_project/UI/Auth.dart';
 import 'package:mad_project/UI/FirebaseListing.dart';
 import 'package:mad_project/UI/Home.dart';
@@ -29,7 +30,7 @@ class ClubsPlus extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Auth(),
+      home: SendNotifi(),
     );
   }
 }
