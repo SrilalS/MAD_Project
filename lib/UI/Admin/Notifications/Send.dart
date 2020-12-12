@@ -9,9 +9,10 @@ class SendNotifi extends StatefulWidget {
 class _SendNotifiState extends State<SendNotifi> {
 
   void sendNotification(String title, String content){
-    Dio().post(
-      
-    );
+    Dio dio = new Dio();
+    dio.options.baseUrl = 'https://onesignal.com/api/v1/notifications';
+    dio.options.headers['content-Type'] = 'application/json';
+    dio.options.headers["authorization"] = "Basic YjYwNWFhNGMtNGQxMi00YjNiLWJhNWUtMzE4NWI5ZjcyY2Q3";
   }
 
   @override
