@@ -42,7 +42,7 @@ class _ClubListCatsState extends State<ClubListCats> {
                   itemBuilder: (context, int index){
                     return Container(
                        margin:const EdgeInsets.all(9),
-                        height:155,
+                        height:140,
                         child: Card(
                           elevation: 8,
                           child: InkWell(
@@ -56,9 +56,10 @@ class _ClubListCatsState extends State<ClubListCats> {
                             children: [
                              // Image.network(clubCats.data.documents[index]['image'].toString()),
                              CachedNetworkImage(
-                              fit: BoxFit.fitWidth,
-                               //width:Get.width,
-                              // height: Get.height,
+                              fit: BoxFit.fill,
+                              //fit: BoxFit.fitHeight,
+                               width:Get.width,
+                              height: Get.height,
                                imageUrl:clubCats.data.documents[index]['image'].toString() ,
                              ),
                           
