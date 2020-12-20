@@ -42,13 +42,13 @@ class _AdminPageState extends State<AdminPage> {
         ),
         centerTitle: false,
 
-        actions: [
-          IconButton(icon:Icon(Icons.send) ,
-              color: Colors.purple,
-              onPressed: (){
-                print("send notification");
-              }),
-        ],
+//        actions: [
+//          IconButton(icon:Icon(Icons.send) ,
+//              color: Colors.purple,
+//              onPressed: (){
+//                print("send notification");
+//              }),
+//        ],
 
       ),
         body: Column(

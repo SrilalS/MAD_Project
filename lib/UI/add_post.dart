@@ -55,16 +55,16 @@ class _AddPostState extends State<AddPost> {
             letterSpacing: -1.2,
           ),
         ),
-        actions: [
-          FlatButton.icon(
-              onPressed: () async{
-                  await DatabaseService().signInAnon();
-              },
-              icon: Icon(Icons.person , color: Colors.white,),
-              label: Text('Register',
-                style: TextStyle(color: Colors.white),
-              ))
-        ],
+//        actions: [
+//          FlatButton.icon(
+//              onPressed: () async{
+//                  await DatabaseService().signInAnon();
+//              },
+//              icon: Icon(Icons.person , color: Colors.white,),
+//              label: Text('Register',
+//                style: TextStyle(color: Colors.white),
+//              ))
+//        ],
       ) ,
       body: Container(
         height: MediaQuery.of(context).size.height ,
