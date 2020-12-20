@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mad_project/UI/club_admin.dart';
 import 'package:mad_project/UI/nav_screens.dart';
+import 'package:mad_project/widgets/loading.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,6 +27,7 @@ class _AddEventPageState extends State<AddEventPage> {
   String clubImage;
   String clubName;
   DateTime date;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -90,15 +92,23 @@ class _AddEventPageState extends State<AddEventPage> {
                           ),
                         ),
                         onPressed: () async{
+                          setState(() {
+                            loading = true;
+                          });
+                          dynamic result =await uploadImage();
+                          if(result == null){
+                            setState(() {
+                              loading = false;
+                            });
+                          }
 
-                          uploadImage();
                         }
                     ),
 
                     SizedBox(height: 20.0),
                     (imageUrl != null)
                         ? Image.network(imageUrl)
-                        : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
+                        : loading ? Loading():Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
                     SizedBox(height: 20.0),
                     RaisedButton(
                         color: Colors.blue[700],

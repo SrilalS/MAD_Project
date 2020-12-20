@@ -31,7 +31,7 @@ class _AddPostState extends State<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.blue[100],
       appBar:AppBar(
         elevation: 0.0,
@@ -101,15 +101,26 @@ class _AddPostState extends State<AddPost> {
                           ),
                         ),
                         onPressed: () async{
+                          setState(() {
+                            loading = true;
+                          });
+                          dynamic result =await uploadImage();
+                          if(result == null){
+                            setState(() {
+                              loading = false;
+                            });
+                          }
 
-                           uploadImage();
+
+
                         }
                     ),
 
                     SizedBox(height: 20.0),
+
                     (imageUrl != null)
-                        ? Image.network(imageUrl)
-                        : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
+                      ? Image.network(imageUrl)
+                       :loading ? Loading():Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
                     SizedBox(height: 20.0),
                     RaisedButton(
                         color: Colors.blue[700],
