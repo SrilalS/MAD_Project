@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mad_project/UI/club_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:mad_project/widgets/club_header.dart';
+import 'package:mad_project/widgets/loading.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/data/data.dart';
@@ -14,6 +15,8 @@ class ClubPostContainer extends StatelessWidget {
   final String clubImage;
   final String clubName;
 
+
+
   const ClubPostContainer({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName}) : super(key: key);
 
 
@@ -21,6 +24,8 @@ class ClubPostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool loading = false;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -43,7 +48,7 @@ class ClubPostContainer extends StatelessWidget {
         imageUrl != null ?
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Image.network(imageUrl),
+          child:loading ? Loading(): Image.network(imageUrl),
           // CachedNetworkImage(imageUrl: post.imageUrl),
           )
        

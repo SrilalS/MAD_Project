@@ -82,7 +82,7 @@ class Post{
       'clubId':clubId,
       'clubImage':clubImage,
       'clubName':clubName,
-//
+
       'imageUrl':imageUrl,
       'postId':postId,
 

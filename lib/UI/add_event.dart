@@ -31,8 +31,9 @@ class _AddEventPageState extends State<AddEventPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return  Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Colors.green[100],
       appBar:AppBar(
         elevation: 0.0,
         leading: IconButton(
@@ -43,7 +44,7 @@ class _AddEventPageState extends State<AddEventPage> {
               Navigator.of(context).pop();
             }),
         brightness: Brightness.light,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green[100],
         title: Text(
           'Add Event',
           style: const TextStyle(
@@ -56,7 +57,7 @@ class _AddEventPageState extends State<AddEventPage> {
 
       ) ,
       body: Container(
-        height: MediaQuery.of(context).size.height -90,
+        height: MediaQuery.of(context).size.height ,
         decoration: BoxDecoration(
             color: Colors.white,
 
@@ -83,57 +84,116 @@ class _AddEventPageState extends State<AddEventPage> {
                       },
                     ),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.blue[700],
-                        child: Text(
-                          'Add Image',
-                          style: TextStyle(
-                              color: Colors.white
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: size.width * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(29),
+                        child: FlatButton(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          color: Colors.blue,
+                          onPressed: () async{
+                            setState(() {
+                              loading = true;
+                            });
+                            dynamic result =await uploadImage();
+                            if(result == null){
+                              setState(() {
+                                loading = false;
+                              });
+                            }
+
+
+
+                          },
+                          child: Text(
+                            'Add Image',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        onPressed: () async{
-                          setState(() {
-                            loading = true;
-                          });
-                          dynamic result =await uploadImage();
-                          if(result == null){
-                            setState(() {
-                              loading = false;
-                            });
-                          }
-
-                        }
+                      ),
                     ),
+//                    RaisedButton(
+//                        color: Colors.blue[700],
+//                        child: Text(
+//                          'Add Image',
+//                          style: TextStyle(
+//                              color: Colors.white
+//                          ),
+//                        ),
+//                        onPressed: () async{
+//                          setState(() {
+//                            loading = true;
+//                          });
+//                          dynamic result =await uploadImage();
+//                          if(result == null){
+//                            setState(() {
+//                              loading = false;
+//                            });
+//                          }
+//
+//                        }
+//                    ),
 
                     SizedBox(height: 20.0),
                     (imageUrl != null)
                         ? Image.network(imageUrl)
                         : loading ? Loading():Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.blue[700],
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: Colors.white
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: size.width * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(29),
+                        child: FlatButton(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          color: Colors.blue,
+                          onPressed: () async{
+                            if(caption != null || imageUrl != null){
+                              DatabaseService().setEvent(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+
+                              Navigator.push(context,
+                                MaterialPageRoute(
+                                    builder:(context) => NavScreen()
+                                ),);
+                            }
+                            else{
+                              error = "Add caption or image";
+                            }
+
+
+                          },
+                          child: Text(
+                            'Add Event',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        onPressed: () async{
-                          if(caption != null || imageUrl != null){
-                            DatabaseService().setEvent(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
-
-                            Navigator.push(context,
-                              MaterialPageRoute(
-                                  builder:(context) => NavScreen()
-                              ),);
-                          }
-                          else{
-                            error = "Add caption or image";
-                          }
-
-
-                        }
+                      ),
                     ),
+//                    RaisedButton(
+//                        color: Colors.blue[700],
+//                        child: Text(
+//                          'Submit',
+//                          style: TextStyle(
+//                              color: Colors.white
+//                          ),
+//                        ),
+//                        onPressed: () async{
+//                          if(caption != null || imageUrl != null){
+//                            DatabaseService().setEvent(caption, imageUrl, "dra,aclub",Uuid().v1() , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+//
+//                            Navigator.push(context,
+//                              MaterialPageRoute(
+//                                  builder:(context) => NavScreen()
+//                              ),);
+//                          }
+//                          else{
+//                            error = "Add caption or image";
+//                          }
+//
+//
+//                        }
+//                    ),
                     SizedBox(height: 12.0),
                     Text(
                       error,

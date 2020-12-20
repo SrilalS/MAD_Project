@@ -62,6 +62,7 @@ class _ClubPageState extends State<ClubPage> {
                           imageUrl: snapshot.data[index].imageUrl,
                           clubImage: snapshot.data[index].clubImage,
                           clubName: snapshot.data[index].clubName,
+
                         );
                       }
                   );
