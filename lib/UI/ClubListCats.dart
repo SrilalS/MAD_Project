@@ -48,12 +48,17 @@ class _ClubListCatsState extends State<ClubListCats> {
                           child: InkWell(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ClubList(ID: clubCats.data.documents[index]['ID'].toString() ,)
+                                  builder: (context) => ClubList(
+                                    id: clubCats.data.documents[index]['ID'].toString() ,
+                                    name: clubCats.data.documents[index]['Name'].toString(),
+                                    imageUrl: "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png",
+                                    )
                                   ));
                             },
                           child: Stack(
                             alignment: AlignmentDirectional.bottomEnd,
                             children: [
+                              Text(clubCats.data.documents[index]['ID'].toString() ),
                              // Image.network(clubCats.data.documents[index]['image'].toString()),
                              CachedNetworkImage(
                               fit: BoxFit.fill,
@@ -76,7 +81,11 @@ class _ClubListCatsState extends State<ClubListCats> {
                             ),
                               FlatButton(onPressed:(){
                                 Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => ClubList(ID: clubCats.data.documents[index]['ID'].toString() ,)
+                                  builder: (context) => ClubList(
+                                    id: clubCats.data.documents[index]['ID'].toString() ,
+                                     name: clubCats.data.documents[index]['Name'].toString(),
+                                    imageUrl:  clubCats.data.documents[index]['image'].toString(),
+                                    )
                                   ));
                               },
                              child:Text("view")

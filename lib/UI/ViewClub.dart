@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:mad_project/UI/ClubList.dart';
 
 class ViewClub extends StatelessWidget {
 //  final String imagePath;
   final String clubName;
   final String description;
+  final String imgUrl;
 
-  const ViewClub({Key key, this.clubName, this.description}) : super(key: key);
+  const ViewClub({Key key, this.clubName, this.description, this.imgUrl}) : super(key: key);
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -21,7 +20,7 @@ class ViewClub extends StatelessWidget {
               color: Colors.black54,
               fontWeight: FontWeight.bold),
           fillColor: Colors.white30,
-          filled: true,
+          filled: false,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide.none),
@@ -33,57 +32,21 @@ class ViewClub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xFF00B0FF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {Get.back();},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: Stack(
+
         alignment: Alignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              //  crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      
-                      Text(description),
-                      // Container(
-                      //   height: 35,
-                      //   width: double.infinity,
-                      //   child: RaisedButton(
-                      //     onPressed: () {
-                      //       print('update');
-                      //     },
-                      //     color: Colors.green,
-                      //     child: Center(
-                      //       child: Text(
-                      //         "Edit Profile",
-                      //         style: TextStyle(
-                      //           fontSize: 23,
-                      //           color: Colors.white,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
           CustomPaint(
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -91,6 +54,32 @@ class ViewClub extends StatelessWidget {
             ),
             painter: HeaderCurvedContainer(),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+
+              //  crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+
+                  height: 300,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(horizontal: 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(height: 60.0),
+                      Text(description),
+                      SizedBox(height: 70.0),
+                    
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -111,6 +100,10 @@ class ViewClub extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 5),
                   shape: BoxShape.circle,
                   color: Colors.white,
+                  image: DecorationImage(
+                   image: NetworkImage(imgUrl),
+                    fit: BoxFit.fill
+                  ),
                 ),
               ),
             ],
@@ -122,12 +115,13 @@ class ViewClub extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class HeaderCurvedContainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Colors.green;
+    Paint paint = Paint()..color = Color(0xFF00B0FF);
     Path path = Path()
       ..relativeLineTo(0, 150)
       ..quadraticBezierTo(size.width / 2, 190, size.width, 150)
