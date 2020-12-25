@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:mad_project/models/models.dart';
 
 class Story {
-  final User user;
+  final Users user;
   final String imageUrl;
   final bool isViewed;
 
