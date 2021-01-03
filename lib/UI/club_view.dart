@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
             // ignore: todo
             // TODO: Add background here
             Image.network(
-                "https://images.template.net/wp-content/uploads/2014/11/Natural-Facebook-Cover-Photo.jpg"),
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nsbm.ac.lk%2F&psig=AOvVaw3eiX2TAB9ErnLj-0-wGCVd&ust=1609766537261000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLC35-nt_-0CFQAAAAAdAAAAABAD"),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
                   // ignore: todo
                   // TODO: Add avatar here
                   backgroundImage: NetworkImage(
-                      "https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg"),
+                      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nsbm.ac.lk%2Fenroll-now%2F&psig=AOvVaw3eiX2TAB9ErnLj-0-wGCVd&ust=1609766537261000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLC35-nt_-0CFQAAAAAdAAAAABAJ"),
                 ),
               ],
             )
