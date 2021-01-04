@@ -7,6 +7,7 @@ import 'package:mad_project/Styles/TextStyles.dart';
 import 'package:mad_project/UI/AuthWidgets/MainLogo.dart';
 
 import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
+import 'package:mad_project/UI/Home.dart';
 
 class Auth extends StatefulWidget {
   @override
@@ -32,21 +33,20 @@ class _AuthState extends State<Auth> {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      //Get.offAll(Scafolding());
-      setState(() {
-        switcher = Text('Login with Google');
+      await FirebaseAuth.instance.signInWithCredential(credential).then((value){
+        print(value.user.email);
+        Get.off(Home());
       });
     } catch (e) {
       Get.snackbar(
-        'Login Failed!',
-        'Login Failed please retry',
+        'SignIn Failed!',
+        'SignIn Failed please retry',
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
         icon: Icon(Icons.error, color: Colors.white,),
       );
       setState(() {
-        switcher = Text('Login with Google');
+        switcher = Text('SignIn with Google');
       });
       print(e);
     }
