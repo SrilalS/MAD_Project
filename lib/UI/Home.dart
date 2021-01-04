@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:mad_project/UI/ClubsList.dart';
+import 'package:mad_project/UI/HomeFeed.dart';
+import 'package:mad_project/UI/Profile.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -44,7 +46,9 @@ class _HomeState extends State<Home> {
       body:  PageView(
           controller: pageController,
           children: [
-            ClubsList()
+            HomeFeed(),
+            ClubsList(),
+            Profile()
           ],
         ),
     );
