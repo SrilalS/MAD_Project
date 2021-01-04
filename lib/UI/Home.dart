@@ -25,11 +25,6 @@ class _HomeState extends State<Home> {
       appBar: AppBar(),
       body: Column(
         children: [
-          RaisedButton(
-            onPressed: (){
-              isLogged();
-            },
-          )
         ],
       ),
     );
