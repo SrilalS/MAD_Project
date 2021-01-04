@@ -1,11 +1,11 @@
-import 'package:mad_project/UI/club_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:mad_project/UI/userProfile23.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:mad_project/UI/home_screen.dart';
-import 'package:mad_project/UI/add_post.dart';
 import 'package:mad_project/UI/add_event_screen.dart';
+import 'package:mad_project/UI/add_post.dart';
+import 'package:mad_project/UI/club_admin.dart';
+import 'package:mad_project/UI/home_screen.dart';
+import 'package:mad_project/UI/userProfile23.dart';
 import 'package:mad_project/widgets/custom_tab_bar.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class NavScreen extends StatefulWidget {
   @override
@@ -13,23 +13,25 @@ class NavScreen extends StatefulWidget {
 }
 
 class _NavScreenState extends State<NavScreen> {
-    final List<Widget> _screens = [
-
+  final List<Widget> _screens = [
     HomeScreen(),
-      AdminPage(),
+    AdminPage(),
     AddPost(),
-    ViewClub(clubName: "Drama cleub",description: "desc",imgUrl: "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png",),
-      AdminEventScreen(),
-
+    ViewClub(
+      clubName: "Drama cleub",
+      description: "desc",
+      imgUrl:
+          "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png",
+    ),
+    AdminEventScreen(),
   ];
-    final List<IconData> _icons = const [
+  final List<IconData> _icons = const [
 //    Icons.flag,
-      Icons.person,
-      Icons.home,
-      MdiIcons.plus,
-      Icons.people,
-      Icons.event,
-
+    Icons.person,
+    Icons.home,
+    MdiIcons.plus,
+    Icons.people,
+    Icons.event,
   ];
 
 //  final List<Color> _colors = const[
@@ -40,6 +42,7 @@ class _NavScreenState extends State<NavScreen> {
 //    Colors.purple
 //  ];
   int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -55,13 +58,11 @@ class _NavScreenState extends State<NavScreen> {
           color: Colors.white,
           child: CustomTabBar(
             icons: _icons,
-            
             selectedIndex: _selectedIndex,
             onTap: (index) => setState(() => _selectedIndex = index),
           ),
         ),
       ),
     );
-  
   }
 }
