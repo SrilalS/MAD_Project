@@ -9,8 +9,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             // ignore: todo
             // TODO: Add background here
-            Image.network(
-                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nsbm.ac.lk%2F&psig=AOvVaw3eiX2TAB9ErnLj-0-wGCVd&ust=1609766537261000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLC35-nt_-0CFQAAAAAdAAAAABAD"),
+            Image.network(post.imageUrl),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
