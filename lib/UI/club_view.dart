@@ -8,13 +8,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Widget> containers = [
     Container(
-      color: Colors.pink,
+      color: Colors.blue[400],
     ),
     Container(
-      color: Colors.blue,
+      color: Colors.blue[400],
     ),
     Container(
-      color: Colors.orange,
+      color: Colors.blue[400],
     )
   ];
 
