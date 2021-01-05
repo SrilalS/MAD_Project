@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_project/config/palette.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -65,8 +66,12 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Rotrac Club',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
+                  'Rotract Club',
+                  style: TextStyle(
+                      color: Palette.nsbmgreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28.0,
+                      letterSpacing: -1.2),
                 ),
                 SizedBox(
                   width: 5.0,
