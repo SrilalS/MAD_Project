@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
+import 'package:mad_project/UI/ClubView/ClubUI.dart';
 
 class ClubsList extends StatefulWidget {
   @override
@@ -61,6 +62,7 @@ class _ClubsListState extends State<ClubsList> {
                           splashColor: Colors.blue,
                           onTap: (){
                             print(snapshot.data.docs[index].id);
+                            Get.to(ClubView(clubDoc :snapshot.data.docs[index]));
                           },
                         ),
                       )

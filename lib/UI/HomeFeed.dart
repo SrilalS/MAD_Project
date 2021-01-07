@@ -47,9 +47,9 @@ class _HomeFeedState extends State<HomeFeed> {
             return Container(
               width: Get.width,
               child: Padding(
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(4),
                 child: Card(
-                  elevation: 4,
+                  elevation: 8,
                   child: InkWell(
                     splashColor: Colors.blue,
                     onTap: (){},
@@ -57,6 +57,7 @@ class _HomeFeedState extends State<HomeFeed> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
+                            padding: const EdgeInsets.all(4),
                             height: 64,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -79,7 +80,10 @@ class _HomeFeedState extends State<HomeFeed> {
                               ],
                             ),
                           ),
-                          Text(snapshot.data.docs[index]['Description']),
+                          Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Text(snapshot.data.docs[index]['Description']),
+                          ),
                           CachedNetworkImage(
                             fit: BoxFit.fitWidth,
                             width: Get.width,
