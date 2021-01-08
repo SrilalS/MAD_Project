@@ -54,7 +54,7 @@ class _ClubViewState extends State<ClubView> {
         children: [
           ClubHomePage(clubDoc: widget.clubDoc),
           ClubEvents(clubDoc: widget.clubDoc),
-          isAdmin ? AdminUI() :
+          isAdmin ? AdminUI(clubDoc: widget.clubDoc) :
           Container(),
         ],
       )
