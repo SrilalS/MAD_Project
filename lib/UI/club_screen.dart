@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_project/UI/post_model.dart';
 import 'package:mad_project/config/palette.dart';
 
 class ClubPage extends StatefulWidget {
