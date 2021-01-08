@@ -9,7 +9,7 @@ class Register extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Confirm your attendance'),
+            title: Text('Register to the event'),
             content: TextField(
               controller: controller,
             ),
