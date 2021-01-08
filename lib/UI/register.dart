@@ -16,7 +16,7 @@ class Register extends StatelessWidget {
             actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
-                child: Text('Confirm'),
+                child: Text('Register'),
                 onPressed: () {},
               ),
             ],
