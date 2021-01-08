@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:mad_project/UI/ClubsList.dart';
@@ -28,7 +29,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(pageNames[page]),),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: page,
         onTap: (index){
@@ -40,10 +40,15 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Home',),
           BottomNavigationBarItem(icon: Icon(FeatherIcons.menu), label: 'Clubs'),
-          BottomNavigationBarItem(icon: Icon(FeatherIcons.user), label: 'Profile')
+          BottomNavigationBarItem(icon: Icon(FeatherIcons.user), label: 'Profile'),
         ],
       ),
       body:  PageView(
+          onPageChanged: (pg){
+            setState(() {
+              page = pg;
+            });
+          },
           controller: pageController,
           children: [
             HomeFeed(),
