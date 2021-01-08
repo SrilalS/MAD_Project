@@ -1,3 +1,4 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:mad_project/UI/club_screen.dart';
 import 'package:mad_project/UI/post_model.dart';
@@ -55,11 +56,9 @@ class _postHeader extends StatelessWidget {
   const _postHeader({Key key, @required this.post}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
-  
     return Row(
       children: <Widget>[
-        ProfileAvatar(imageUrl: post.user.photoURL),
+        CircularProfileAvatar(imageUrl: post.user.photoURL),
         const SizedBox(width: 8.0),
         Expanded(
             child: Column(
