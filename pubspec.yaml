@@ -23,6 +23,7 @@ dependencies:
   flutter_palette: ^0.2.0+3
   circular_profile_avatar: ^1.0.8
   cached_network_image: ^2.5.0
+  cupertino_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
