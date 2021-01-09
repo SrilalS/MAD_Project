@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nice_button/nice_button.dart';
 
 class Register extends StatefulWidget {
   Register() : super();
