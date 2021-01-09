@@ -2,6 +2,7 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:mad_project/UI/club_screen.dart';
 import 'package:mad_project/UI/post_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PostContainer extends StatelessWidget {
   final Post post;
@@ -58,7 +59,7 @@ class _postHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        CircularProfileAvatar(imageUrl: post.user.photoURL),
+        Center(child: CircularProfileAvatar(imageUrl: post.user.photoURL)),
         const SizedBox(width: 8.0),
         Expanded(
             child: Column(
