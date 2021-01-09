@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                 onChanged: (val) {
                   print("Radio Tile pressed $val");
                 },
-                activeColor: Colors.blue,
+                activeColor: Colors.blue[900],
                 selected: true,
               ),
               RadioListTile(
