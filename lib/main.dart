@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mad_project/UI/Auth.dart';
 import 'package:mad_project/UI/Home.dart';
+
+import 'package:mad_project/UI/Viewprofile.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
