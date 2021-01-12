@@ -3,18 +3,23 @@ import 'package:get/get.dart';
 
 class AdminViewClub extends StatefulWidget {
 //  final String imagePath;
-  final String CName;
+  final String clubName;
   final String des;
   final String imgUrl;
 
-  const AdminViewClub({Key key, this.CName, this.des, this.imgUrl})
+  const AdminViewClub({Key key, this.clubName, this.des, this.imgUrl})
       : super(key: key);
 
   @override
-  _AdminViewClubState createState() => _AdminViewClubState();
+  _AdminViewClubState createState() =>
+      _AdminViewClubState(clubName, des, imgUrl);
 }
 
 class _AdminViewClubState extends State<AdminViewClub> {
+  final String clubName;
+  final String description;
+  final String imgUrl;
+  _AdminViewClubState(this.clubName, this.description, this.imgUrl);
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -79,7 +84,7 @@ class _AdminViewClubState extends State<AdminViewClub> {
                         width: double.infinity,
                         child: RaisedButton(
                           onPressed: () {
-                            dialogTest;
+                            dialogTest(clubName, description, imgUrl);
                           },
                           color: Colors.green,
                           child: Center(
@@ -104,7 +109,7 @@ class _AdminViewClubState extends State<AdminViewClub> {
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(widget.CName,
+                child: Text(widget.clubName,
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1.5,
