@@ -37,102 +37,120 @@ class Editprofile extends StatelessWidget {
           },
         ),
       ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              //  crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
+      body: Container(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 0),
+                CustomPaint(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                  ),
+                  painter: HeaderCurvedContainer(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //  crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      textfield(
-                        hintText: "Username",
-                      ),
-                      textfield(
-                        hintText: "Email",
-                      ),
-                      textfield(
-                        hintText: "Faculty",
-                      ),
-                      textfield(
-                        hintText: "Registerd Clubs",
+                      SizedBox(
+                        height: 30,
                       ),
                       Container(
-                        height: 35,
+                        height: 300,
                         width: double.infinity,
-                        child: RaisedButton(
-                          onPressed: () {},
-                          color: Colors.green,
-                          child: Center(
-                            child: Text(
-                              "Update",
-                              style: TextStyle(
-                                fontSize: 23,
-                                color: Colors.white,
+                        margin: EdgeInsets.symmetric(horizontal: 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            textfield(
+                              hintText: "Username",
+                            ),
+                            textfield(
+                              hintText: "Email",
+                            ),
+                            textfield(
+                              hintText: "Faculty",
+                            ),
+                            textfield(
+                              hintText: "Registerd Clubs",
+                            ),
+                            Container(
+                              height: 35,
+                              width: double.infinity,
+                              child: RaisedButton(
+                                onPressed: () {},
+                                color: Colors.green,
+                                child: Center(
+                                  child: Text(
+                                    "Update",
+                                    style: TextStyle(
+                                      fontSize: 23,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ),
+                      )
                     ],
                   ),
-                )
+                ),
+                // CustomPaint(
+                //   child: Container(
+                //     width: MediaQuery.of(context).size.width,
+                //     height: MediaQuery.of(context).size.height,
+                //   ),
+                //   painter: HeaderCurvedContainer(),
+                // ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(0),
+                      child: Text("Edit Profile",
+                          style: TextStyle(
+                              fontSize: 35,
+                              letterSpacing: 1.5,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10.0),
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: MediaQuery.of(context).size.height - 430,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 5),
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        image: DecorationImage(
+                            image: NetworkImage(''), fit: BoxFit.fill),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 200, left: 184),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black54,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          CustomPaint(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-            ),
-            painter: HeaderCurvedContainer(),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(0),
-                child: Text("Edit Profile",
-                    style: TextStyle(
-                        fontSize: 35,
-                        letterSpacing: 1.5,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600)),
-              ),
-              Container(
-                padding: EdgeInsets.all(10.0),
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.height - 430,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 5),
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 200, left: 184),
-            child: CircleAvatar(
-              backgroundColor: Colors.black54,
-              child: IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
