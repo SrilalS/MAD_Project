@@ -1,0 +1,14 @@
+{
+  "client_id": "78909fd3-1677-4cba-9f68-654fe75388d3",
+  "authorization_user_agent": "DEFAULT",
+  "redirect_uri": "msauth://com.nsbm.clubsplus/xTD7hLuYUUFUdwuPB7nFyF4gq%2Bc%3D",
+  "authorities": [
+    {
+      "type": "AAD",
+      "audience": {
+        "type": "AzureADMyOrg",
+        "tenant_id": "9486ac65-39d3-4d25-977c-76d9c31c0046"
+      }
+    }
+  ]
+}
