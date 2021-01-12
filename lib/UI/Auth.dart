@@ -85,6 +85,7 @@ class _AuthState extends State<Auth> {
                         shape: rShapeBorder(32),
                         child: switcher,
                         onPressed: (){
+						//SXN
                           signInWithGoogle();
                         },
                       ),
