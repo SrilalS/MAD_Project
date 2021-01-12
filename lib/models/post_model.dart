@@ -44,6 +44,7 @@ import 'package:meta/meta.dart';
 //    };
 //  }
 //}
+
 class Post {
   final String caption;
   final String clubId;
@@ -70,6 +71,24 @@ class Post {
 //      date: json['date'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
       postId: json['postId'] ?? '',
+
+    );
+
+  }
+  Map<String, dynamic > toMap(){
+    return{
+
+      'caption':caption,
+      'clubId':clubId,
+      'clubImage':clubImage,
+      'clubName':clubName,
+
+      'imageUrl':imageUrl,
+      'postId':postId,
+
+    };
+  }
+}
     );
   }
   Map<String, dynamic> toMap() {

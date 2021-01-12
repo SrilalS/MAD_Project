@@ -1,17 +1,19 @@
 
+import 'package:mad_project/UI/edit_post.dart';
 import 'package:mad_project/models/models.dart';
-import 'package:mad_project/UI/club_screen.dart';
-
+import 'package:mad_project/services/database_service.dart';
 import 'package:mad_project/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class EventContainer extends StatelessWidget {
+class AdminPost extends StatelessWidget {
   final String caption;
   final String imageUrl;
   final String clubImage;
   final String clubName;
+  final String postId;
 
-  const EventContainer({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName}) : super(key: key);
+  const AdminPost({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId}) : super(key: key);
 
 
   @override
@@ -27,9 +29,10 @@ class EventContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  _postHeader(clubImage: clubImage,clubName: clubName,),
+                  _postHeader(clubName: clubName,clubImage: clubImage,),
                   const SizedBox(height: 4.0,),
                   Text(caption),
+
                   imageUrl != null ? const SizedBox.shrink() : const SizedBox(height: 6.0,)
 
                 ],
@@ -44,7 +47,13 @@ class EventContainer extends StatelessWidget {
 
                 : const SizedBox.shrink(),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: _postStats(clubName: clubName,),
+              child: _postStats(
+                caption: caption,
+                imageUrl: imageUrl,
+                clubImage: clubImage,
+                clubName: clubName,
+                postId: postId,
+              ),
             )
           ],
         )
@@ -63,7 +72,7 @@ class _postHeader  extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        ProfileAvatar(imageUrl: clubImage),
+       ProfileAvatar(imageUrl: clubImage),
         const SizedBox(width:8.0),
         Expanded(
             child:   Column(
@@ -90,57 +99,88 @@ class _postHeader  extends StatelessWidget {
               ],
             )
         ),
-        // IconButton(icon: const Icon(Icons.more_horiz),
-        //  onPressed: () => print('More'),
-        //  )
+
       ],
     );
   }
 }
 
 class _postStats extends StatelessWidget {
-final String clubName;
+  final String caption;
+  final String imageUrl;
+  final String clubImage;
+  final String clubName;
+  final String postId;
 
-  const _postStats({Key key, this.clubName}) : super(key: key);
+  const _postStats({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+
             Container(
 
-              width: 100,
-              height: 25,
-              padding: const EdgeInsets.all(4.0),
-              child: RaisedButton(
-                color: Colors.blue[400],
-                onPressed: () {
+              width: 50,
+              height: 45,
 
+              padding: const EdgeInsets.all(4.0),
+
+              child: RaisedButton(
+
+
+                color: Colors.white,
+                elevation: 0,
+                onPressed: () {
                   Navigator.push(context,
                     MaterialPageRoute(
-                        builder:(context) => ClubPage(clubName: clubName,)
+                        builder:(context) => EditPostPage(clubName: clubName,imageUrl: imageUrl,clubImage: clubImage,postId: postId,caption: caption,)
                     ),);
+
+
                 },
-                child: const Text('View Club',
-                    style: TextStyle(fontSize: 11 , color: Colors.white)),
+                child:Align(
+                  alignment: Alignment.center,
+                  child:const Icon(Icons.edit, size: 18,color: Colors.blue,),
+                )
+
+
+//                child: const Text('Edit',
+//                 style: TextStyle(fontSize: 11 , color: Colors.white)),
               ),
+
             ),
             const SizedBox(width: 4.0,),
             Container(
 
-              width: 140,
-              height: 25,
+              width: 50,
+              height: 45,
+
               padding: const EdgeInsets.all(4.0),
+
               child: RaisedButton(
-                color: Colors.blue[400],
-                onPressed: () {
-                  print("Register");
-                },
-                child: const Text('Register Event',
-                    style: TextStyle(fontSize: 11 , color: Colors.white)),
+
+
+                  color: Colors.white,
+                  elevation: 0,
+                  onPressed: () {
+
+                    DatabaseService().deletePost(postId);
+                    print(postId);
+                  },
+                  child:Align(
+                    alignment: Alignment.center,
+                    child:const Icon(MdiIcons.delete, size: 18,color: Colors.red,),
+                  )
+
+
+//                child: const Text('Edit',
+//                 style: TextStyle(fontSize: 11 , color: Colors.white)),
               ),
+
             ),
 
           ],
