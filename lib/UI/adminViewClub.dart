@@ -3,24 +3,18 @@ import 'package:get/get.dart';
 
 class AdminViewClub extends StatefulWidget {
 //  final String imagePath;
-  final String clubName;
-  final String description;
+  final String CName;
+  final String des;
   final String imgUrl;
 
-  const AdminViewClub({Key key, this.clubName, this.description, this.imgUrl})
+  const AdminViewClub({Key key, this.CName, this.des, this.imgUrl})
       : super(key: key);
 
   @override
-  _AdminViewClubState createState() =>
-      _AdminViewClubState(clubName, description, imgUrl);
+  _AdminViewClubState createState() => _AdminViewClubState();
 }
 
 class _AdminViewClubState extends State<AdminViewClub> {
-  final String clubName;
-  final String description;
-  final String imgUrl;
-
-  _AdminViewClubState(this.clubName, this.description, this.imgUrl);
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -78,14 +72,14 @@ class _AdminViewClubState extends State<AdminViewClub> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height: 60.0),
-                      Text(widget.description),
+                      Text(widget.des),
                       SizedBox(height: 70.0),
                       Container(
                         height: 35,
                         width: double.infinity,
                         child: RaisedButton(
                           onPressed: () {
-                            dialogTest(clubName, description, imgUrl);
+                            dialogTest;
                           },
                           color: Colors.green,
                           child: Center(
@@ -110,7 +104,7 @@ class _AdminViewClubState extends State<AdminViewClub> {
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(widget.clubName,
+                child: Text(widget.CName,
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1.5,
