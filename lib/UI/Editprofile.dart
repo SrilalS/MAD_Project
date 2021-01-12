@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mad_project/UI/Editprofile.dart';
 
-class Viewprofile extends StatelessWidget {
-  final String clubName;
-  final String description;
-  final String imgUrl;
-
-  const Viewprofile({Key key, this.clubName, this.description, this.imgUrl})
-      : super(key: key);
-
+class Editprofile extends StatelessWidget {
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -40,19 +32,14 @@ class Viewprofile extends StatelessWidget {
         backgroundColor: Color(0xFF00B0FF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: Stack(
         alignment: Alignment.center,
         children: [
-          CustomPaint(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-            ),
-            painter: HeaderCurvedContainer(),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -66,33 +53,27 @@ class Viewprofile extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        "Username",
+                      textfield(
+                        hintText: "Username",
                       ),
-                      Text(
-                        "Email",
+                      textfield(
+                        hintText: "Email",
                       ),
-                      Text(
-                        "Faculty",
+                      textfield(
+                        hintText: "Faculty",
                       ),
-                      Text(
-                        "Registerd Clubs",
+                      textfield(
+                        hintText: "Registerd Clubs",
                       ),
                       Container(
                         height: 35,
                         width: double.infinity,
                         child: RaisedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Editprofile()),
-                            );
-                          },
+                          onPressed: () {},
                           color: Colors.green,
                           child: Center(
                             child: Text(
-                              "Edit Profile",
+                              "Update",
                               style: TextStyle(
                                 fontSize: 23,
                                 color: Colors.white,
@@ -107,19 +88,19 @@ class Viewprofile extends StatelessWidget {
               ],
             ),
           ),
-          // CustomPaint(
-          //   child: Container(
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height,
-          //   ),
-          //   painter: HeaderCurvedContainer(),
-          // ),
+          CustomPaint(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+            ),
+            painter: HeaderCurvedContainer(),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(clubName,
+                child: Text("Edit Profile",
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1.5,
@@ -134,14 +115,22 @@ class Viewprofile extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 5),
                   shape: BoxShape.circle,
                   color: Colors.white,
-                  image: DecorationImage(
-                      image: NetworkImage(imgUrl), fit: BoxFit.fill),
                 ),
               ),
             ],
           ),
           Padding(
             padding: EdgeInsets.only(bottom: 200, left: 184),
+            child: CircleAvatar(
+              backgroundColor: Colors.black54,
+              child: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            ),
           ),
         ],
       ),

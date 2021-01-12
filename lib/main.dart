@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mad_project/UI/Home.dart';
+import 'package:mad_project/UI/Editprofile.dart';
 import 'package:mad_project/UI/Viewprofile.dart';
 
 void main() {
@@ -15,7 +15,12 @@ class ClubsPlus extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Viewprofile(),
+      home: Viewprofile(
+        clubName: "ViewProfile",
+        description: "desc",
+        imgUrl:
+            "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png",
+      ),
     );
   }
 }
