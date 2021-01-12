@@ -11,10 +11,16 @@ class AdminViewClub extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AdminViewClubState createState() => _AdminViewClubState();
+  _AdminViewClubState createState() =>
+      _AdminViewClubState(clubName, description, imgUrl);
 }
 
 class _AdminViewClubState extends State<AdminViewClub> {
+  final String clubName;
+  final String description;
+  final String imgUrl;
+
+  _AdminViewClubState(this.clubName, this.description, this.imgUrl);
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -79,7 +85,7 @@ class _AdminViewClubState extends State<AdminViewClub> {
                         width: double.infinity,
                         child: RaisedButton(
                           onPressed: () {
-                            print('update');
+                            dialogTest(clubName, description, imgUrl);
                           },
                           color: Colors.green,
                           child: Center(
