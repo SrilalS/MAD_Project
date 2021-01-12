@@ -7,6 +7,8 @@ import 'package:mad_project/UI/ClubListCats.dart';
 
 import 'package:mad_project/UI/Auth.dart';
 import 'package:mad_project/UI/Home.dart';
+import 'package:mad_project/UI/dialogtest.dart';
+import 'package:mad_project/UI/event_screens.dart';
 
 import 'package:mad_project/UI/Viewprofile.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
