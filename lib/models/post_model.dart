@@ -44,7 +44,8 @@ import 'package:meta/meta.dart';
 //    };
 //  }
 //}
-class Post{
+
+class Post {
   final String caption;
   final String clubId;
   final String clubImage;
@@ -63,7 +64,6 @@ class Post{
       this.postId});
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-
       caption: json['caption'] ?? '',
       clubId: json['clubId'] ?? '',
       clubImage: json['clubImage'] ?? '',
@@ -86,6 +86,20 @@ class Post{
       'imageUrl':imageUrl,
       'postId':postId,
 
+    };
+  }
+}
+    );
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'caption': caption,
+      'clubId': clubId,
+      'clubImage': clubImage,
+      'clubName': clubName,
+//
+      'imageUrl': imageUrl,
+      'postId': postId,
     };
   }
 }
