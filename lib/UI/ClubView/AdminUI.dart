@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mad_project/Classes/StorageController.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 import 'package:mad_project/UI/Admin/Notifications/Send.dart';
+import 'package:mad_project/UI/ClubView/NewPostEvent.dart';
 
 class AdminUI extends StatefulWidget {
   final DocumentSnapshot clubDoc;
@@ -146,6 +147,23 @@ class _AdminUIState extends State<AdminUI> {
             Text(
               'Admin Tools',
               style: h1(24),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Text(
+                    'New',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Get.to(NewPostEvent(clubDoc: widget.clubDoc));
+                  },
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
