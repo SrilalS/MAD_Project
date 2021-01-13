@@ -33,7 +33,7 @@ class _HomeFeedState extends State<HomeFeed> {
       stream: fstore.collection('HomeFeed').get().asStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done ||
-            qsnap.isNullOrBlank) {
+            qsnap.isBlank) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -64,6 +64,7 @@ class _HomeFeedState extends State<HomeFeed> {
                               children: [
                                 ClipOval(
                                   child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
                                     width: 48,
                                     height: 48,
                                     imageUrl: qsnap.docs.where((element) => element.id == snapshot.data.docs[index]['ClubID']).first['Logo'],
@@ -71,14 +72,16 @@ class _HomeFeedState extends State<HomeFeed> {
                                 ),
                                 Text(
                                   ' '
-                                      +snapshot.data.docs[index]['Title']
-                                      + ' by '
-                                      + qsnap.docs.where((element) => element.id == snapshot.data.docs[index]['ClubID']).first['Name'],
-                                  style: titleTexts(
-                                      Colors.black, FontWeight.normal, 21),
+                                      +snapshot.data.docs[index]['Title'],
+                                      style: titleTexts(
+                                      Colors.black, FontWeight.normal, 16),
                                 ),
                               ],
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Text(qsnap.docs.where((element) => element.id == snapshot.data.docs[index]['ClubID']).first['Name']),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(4),

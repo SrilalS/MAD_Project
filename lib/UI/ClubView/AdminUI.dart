@@ -1,8 +1,5 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -52,13 +49,6 @@ class _AdminUIState extends State<AdminUI> {
     });
   }
 
-  String chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  Random rnd = Random();
-
-  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
-
   Widget switcher = Text(
     'Save',
     style: TextStyle(color: Colors.white),
@@ -66,17 +56,11 @@ class _AdminUIState extends State<AdminUI> {
 
   Future uploadLogo() async {
     setState(() {
-      //editMode = false;
       switcher = Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),);
     });
     try {
-      await fstorage.FirebaseStorage.instance
-          .ref('clubRes/Logo_' + widget.clubDoc.id + '.png')
-          .putFile(logo)
-          .then((val) async {
-        logoURL = await fstorage.FirebaseStorage.instance
-            .ref(val.metadata.fullPath)
-            .getDownloadURL();
+      await storageController.upload('Logo_'+ widget.clubDoc.id, logo).then((value){
+        logoURL = value;
       }).then((value) => uploadCover());
     } catch (e) {
       print(e);
@@ -85,14 +69,9 @@ class _AdminUIState extends State<AdminUI> {
 
   Future uploadCover() async {
     try {
-      await fstorage.FirebaseStorage.instance
-          .ref('clubRes/Cover_' + widget.clubDoc.id + '.png')
-          .putFile(cover)
-          .then((val) async{
-        coverURL = await fstorage.FirebaseStorage.instance
-            .ref(val.metadata.fullPath)
-            .getDownloadURL();
-      }).then((value) => saveClub());
+        await storageController.upload('Cover_'+ widget.clubDoc.id, logo).then((value){
+          coverURL = value;
+        }).then((value) => saveClub());
     } catch (e) {
       print(e);
     }
