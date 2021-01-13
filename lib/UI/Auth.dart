@@ -66,7 +66,13 @@ class _AuthState extends State<Auth> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            mainLogo(),
+           Column(
+             children: [
+               mainLogo(),
+               SizedBox(height: 4),
+               Text('Clubs Plus', style: titleTexts(Colors.grey.shade800, FontWeight.bold, 24),),
+             ],
+           ),
             Container(
               height: 128,
               width: Get.width*0.75,

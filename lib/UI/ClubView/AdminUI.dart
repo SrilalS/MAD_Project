@@ -6,6 +6,9 @@ import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mad_project/Classes/StorageController.dart';
+import 'package:mad_project/Styles/TextStyles.dart';
+import 'package:mad_project/UI/Admin/Notifications/Send.dart';
 
 class AdminUI extends StatefulWidget {
   final DocumentSnapshot clubDoc;
@@ -17,8 +20,10 @@ class AdminUI extends StatefulWidget {
 }
 
 class _AdminUIState extends State<AdminUI> {
+  final StorageController storageController = new StorageController();
   File logo;
   final logopicker = ImagePicker();
+  bool editMode = false;
 
   File cover;
   final coverpicker = ImagePicker();
@@ -54,14 +59,25 @@ class _AdminUIState extends State<AdminUI> {
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
 
+  Widget switcher = Text(
+    'Save',
+    style: TextStyle(color: Colors.white),
+  );
+
   Future uploadLogo() async {
+    setState(() {
+      //editMode = false;
+      switcher = Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),);
+    });
     try {
       await fstorage.FirebaseStorage.instance
           .ref('clubRes/Logo_' + widget.clubDoc.id + '.png')
           .putFile(logo)
-          .then((val) {
-        print(val);
-      });
+          .then((val) async {
+        logoURL = await fstorage.FirebaseStorage.instance
+            .ref(val.metadata.fullPath)
+            .getDownloadURL();
+      }).then((value) => uploadCover());
     } catch (e) {
       print(e);
     }
@@ -72,22 +88,71 @@ class _AdminUIState extends State<AdminUI> {
       await fstorage.FirebaseStorage.instance
           .ref('clubRes/Cover_' + widget.clubDoc.id + '.png')
           .putFile(cover)
-          .then((val) {
-        print(val);
-      });
+          .then((val) async{
+        coverURL = await fstorage.FirebaseStorage.instance
+            .ref(val.metadata.fullPath)
+            .getDownloadURL();
+      }).then((value) => saveClub());
     } catch (e) {
       print(e);
     }
   }
-  
-  Future saveClub(){
+
+  String logoURL = '';
+  String coverURL = '';
+
+  void saveClub() {
     fbase.collection('Clubs').doc(widget.clubDoc.id).set({
-      'Name':'Name',
-      'Description':'Des',
-      'Category':'',
-      'Logo': 'logo',
-      'CoverPhoto':'cover',
+      'Name': name.text,
+      'Description': desc.text,
+      'Category': '',
+      'Logo': logoURL,
+      'CoverPhoto': coverURL,
+    }).then((value){
+      Get.snackbar(
+          'Success!',
+          'Settings Saved!',
+          icon: Icon(Icons.cloud_done, color: Colors.white),
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
+      setState(() {
+        editMode = false;
+        switcher = Text(
+          'Save',
+          style: TextStyle(color: Colors.white),
+        );
+      });
     });
+  }
+
+  toggleVisibility() {
+    setState(() {
+      editMode = !editMode;
+    });
+  }
+
+  TextEditingController name = TextEditingController();
+  TextEditingController desc = TextEditingController();
+
+  setTexts() {
+    setState(() {
+      name.text = widget.clubDoc['Name'];
+      desc.text = widget.clubDoc['Description'];
+    });
+  }
+
+  showNotifications(){
+    Get.defaultDialog(
+      radius: 8,
+      title: 'Send Alert',
+      content: SendNotifi(),
+    );
+  }
+
+  @override
+  void initState() {
+    setTexts();
+    super.initState();
   }
 
   @override
@@ -99,95 +164,148 @@ class _AdminUIState extends State<AdminUI> {
         child: Column(
           children: [
             SizedBox(height: 16),
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Club/Society Name', border: OutlineInputBorder()),
+            Text(
+              'Admin Tools',
+              style: h1(24),
             ),
-            SizedBox(height: 8),
-            TextFormField(
-              minLines: 6,
-              maxLines: 8,
-              decoration: InputDecoration(
-                  labelText: 'Description', border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      width: 128,
-                      child: RaisedButton(
-                        elevation: 4,
-                        onPressed: () {
-                          getLogo();
-                        },
-                        child: Text('Select Logo'),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 128,
-                          width: 128,
-                          child: logo == null
-                              ? Text('Select the Club Logo')
-                              : Image.file(
-                                  logo,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                        )
-                      ],
-                    ),
-                  ],
+                RaisedButton(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Text(
+                    'Edit',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    toggleVisibility();
+                  },
                 ),
-                Column(
-                  children: [
-                    Container(
-                      width: 128,
-                      child: RaisedButton(
-                        elevation: 4,
-                        onPressed: () {
-                          coverPhoto();
-                        },
-                        child: Text('Select Cover Image'),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 128,
-                          width: 128,
-                          child: cover == null
-                              ? Text('Select the Club Cover')
-                              : Image.file(
-                                  cover,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                        )
-                      ],
-                    ),
-                  ],
-                )
+                RaisedButton(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Text('Send Alerts',
+                      style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+                    showNotifications();
+                  },
+                ),
+                RaisedButton(
+                  color: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Text('Members', style: TextStyle(color: Colors.white)),
+                  onPressed: () {},
+                ),
               ],
             ),
-            SizedBox(height: 8),
-            Container(
-              width: Get.width,
-              child: RaisedButton(
-                onPressed: () {
-                  uploadLogo();
-                },
-                color: Colors.blue,
-                child: Text(
-                  'Save',
-                  style: TextStyle(color: Colors.white),
-                ),
+            SizedBox(height: 16),
+            Visibility(
+              visible: editMode,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'Club/Society Name',
+                        border: OutlineInputBorder()),
+                    controller: name,
+                  ),
+                  SizedBox(height: 8),
+                  TextFormField(
+                    minLines: 6,
+                    maxLines: 8,
+                    decoration: InputDecoration(
+                        labelText: 'Description', border: OutlineInputBorder()),
+                    controller: desc,
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: 128,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)),
+                              elevation: 4,
+                              onPressed: () {
+                                getLogo();
+                              },
+                              child: Text('Select Logo'),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 128,
+                                width: 128,
+                                child: logo == null
+                                    ? Text('Select the Club Logo')
+                                    : Image.file(
+                                        logo,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            width: 128,
+                            child: RaisedButton(
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)),
+                              onPressed: () {
+                                coverPhoto();
+                              },
+                              child: Text('Select Cover Image'),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 128,
+                                width: 128,
+                                child: cover == null
+                                    ? Text('Select the Club Cover')
+                                    : Image.file(
+                                        cover,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Container(
+                    height: 48,
+                    width: Get.width,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      onPressed: () {
+                        uploadLogo();
+                      },
+                      color: Colors.blue,
+                      child: switcher,
+                    ),
+                  )
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),

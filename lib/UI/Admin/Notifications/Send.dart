@@ -43,30 +43,30 @@ class _SendNotifiState extends State<SendNotifi> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return Container(
+          width: Get.width * 0.8,
+          //height: Get.height * 0.5,
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Title' , style: titleTexts(Colors.black, FontWeight.normal, 24)),
               TextField(
                 controller: titleC,
-                style: TextStyle(fontSize: 21),
+                style: TextStyle(fontSize: 16),
                 decoration: InputDecoration(
-
+                    labelText: 'Title',
                     border: outlineIB()
                 ),
               ),
-              Text('Content' , style: titleTexts(Colors.black, FontWeight.normal, 24)),
+              SizedBox(height: 16),
               TextField(
                 controller: contentC,
                 maxLines: 12,
                 minLines: 2,
-                style: TextStyle(fontSize: 21),
+                style: TextStyle(fontSize: 16),
                 decoration: InputDecoration(
+                    labelText: 'Messege',
                     border: outlineIB()
                 ),
               ),
@@ -75,7 +75,7 @@ class _SendNotifiState extends State<SendNotifi> {
                 width: Get.width,
                 height: 48,
                 child: RaisedButton(
-                  shape: rShapeBorder(32),
+                  shape: rShapeBorder(4),
                   child: Text('Send'),
                   color: Colors.blue,
                   textTheme: ButtonTextTheme.primary,
@@ -94,17 +94,8 @@ class _SendNotifiState extends State<SendNotifi> {
                   },
                 ),
               ),
-              RaisedButton(
-                onPressed: () async {
-                  StorageController sc = new StorageController();
-                  String xc = await sc.upload('X');
-                  print(xc);
-                },
-              )
             ],
           ),
-        ),
-      )
-    );
+        );
   }
 }

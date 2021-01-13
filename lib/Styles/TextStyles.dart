@@ -9,6 +9,14 @@ TextStyle titleTexts(Color color, FontWeight fontWeight, double fontSize){
   );
 }
 
+TextStyle h1(double fontSize){
+  return TextStyle(
+    color: Colors.grey.shade800,
+    fontWeight: FontWeight.bold,
+    fontSize: fontSize,
+  );
+}
+
 RoundedRectangleBorder rShapeBorder(double rad){
   return RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(rad)
