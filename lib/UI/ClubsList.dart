@@ -56,14 +56,17 @@ class _ClubsListState extends State<ClubsList> {
                           ],
                         ),
                       ),
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          splashColor: Colors.blue,
-                          onTap: (){
-                            print(snapshot.data.docs[index].id);
-                            Get.to(ClubView(clubDoc :snapshot.data.docs[index]));
-                          },
+                      Hero(
+                        tag: 'CLUB',
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            splashColor: Colors.blue,
+                            onTap: (){
+                              print(snapshot.data.docs[index].id);
+                              Get.to(ClubView(clubDoc :snapshot.data.docs[index]));
+                            },
+                          ),
                         ),
                       )
                     ],

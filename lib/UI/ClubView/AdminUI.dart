@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,10 +58,16 @@ class _AdminUIState extends State<AdminUI> {
 
   Future uploadLogo() async {
     setState(() {
-      switcher = Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),);
+      switcher = Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+        ),
+      );
     });
     try {
-      await storageController.upload('Logo_'+ widget.clubDoc.id, logo).then((value){
+      await storageController
+          .upload('Logo_' + widget.clubDoc.id, logo)
+          .then((value) {
         logoURL = value;
       }).then((value) => uploadCover());
     } catch (e) {
@@ -70,9 +77,11 @@ class _AdminUIState extends State<AdminUI> {
 
   Future uploadCover() async {
     try {
-        await storageController.upload('Cover_'+ widget.clubDoc.id, logo).then((value){
-          coverURL = value;
-        }).then((value) => saveClub());
+      await storageController
+          .upload('Cover_' + widget.clubDoc.id, logo)
+          .then((value) {
+        coverURL = value;
+      }).then((value) => saveClub());
     } catch (e) {
       print(e);
     }
@@ -88,10 +97,8 @@ class _AdminUIState extends State<AdminUI> {
       'Category': '',
       'Logo': logoURL,
       'CoverPhoto': coverURL,
-    }).then((value){
-      Get.snackbar(
-          'Success!',
-          'Settings Saved!',
+    }).then((value) {
+      Get.snackbar('Success!', 'Settings Saved!',
           icon: Icon(Icons.cloud_done, color: Colors.white),
           backgroundColor: Colors.green,
           colorText: Colors.white);
@@ -121,7 +128,7 @@ class _AdminUIState extends State<AdminUI> {
     });
   }
 
-  showNotifications(){
+  showNotifications() {
     Get.defaultDialog(
       radius: 8,
       title: 'Send Alert',
@@ -148,22 +155,20 @@ class _AdminUIState extends State<AdminUI> {
               'Admin Tools',
               style: h1(24),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  color: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                  child: Text(
-                    'New',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    Get.to(NewPostEvent(clubDoc: widget.clubDoc));
-                  },
+            Container(
+              width: Get.width,
+              child: RaisedButton(
+                color: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4)),
+                child: Text(
+                  'New Event/Post',
+                  style: TextStyle(color: Colors.white),
                 ),
-              ],
+                onPressed: () {
+                  Get.to(NewPostEvent(clubDoc: widget.clubDoc));
+                },
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -173,7 +178,7 @@ class _AdminUIState extends State<AdminUI> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Text(
-                    'Edit',
+                    'Edit Club',
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {

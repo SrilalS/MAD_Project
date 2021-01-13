@@ -25,39 +25,42 @@ class _ClubViewState extends State<ClubView> {
   List<String> pageNames = ['Home','Clubs','Profile'];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: page,
-        onTap: (index){
-          setState(() {
-            page = index;
-            pageController.jumpToPage(page);
-          });
-        },
-        items: [
-          BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Club Home',),
-          BottomNavigationBarItem(icon: Icon(FeatherIcons.alignCenter), label: 'Events'),
-          isAdmin ?
-          BottomNavigationBarItem(icon: Icon(FeatherIcons.shield), label: 'Admin') :
-          BottomNavigationBarItem(icon: Icon(FeatherIcons.plusCircle), label: 'Join')
+    return Hero(
+      tag: 'CLUB',
+      child: Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: page,
+            onTap: (index){
+              setState(() {
+                page = index;
+                pageController.jumpToPage(page);
+              });
+            },
+            items: [
+              BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Club Home',),
+              BottomNavigationBarItem(icon: Icon(FeatherIcons.alignCenter), label: 'Events'),
+              isAdmin ?
+              BottomNavigationBarItem(icon: Icon(FeatherIcons.shield), label: 'Admin') :
+              BottomNavigationBarItem(icon: Icon(FeatherIcons.plusCircle), label: 'Join')
 
 
-        ],
+            ],
+          ),
+          body: PageView(
+            controller: pageController,
+            onPageChanged: (pg){
+              setState(() {
+                page = pg;
+              });
+            },
+            children: [
+              ClubHomePage(clubDoc: widget.clubDoc),
+              ClubEvents(clubDoc: widget.clubDoc),
+              isAdmin ? AdminUI(clubDoc: widget.clubDoc) :
+              Container(),
+            ],
+          )
       ),
-      body: PageView(
-        controller: pageController,
-        onPageChanged: (pg){
-          setState(() {
-            page = pg;
-          });
-        },
-        children: [
-          ClubHomePage(clubDoc: widget.clubDoc),
-          ClubEvents(clubDoc: widget.clubDoc),
-          isAdmin ? AdminUI(clubDoc: widget.clubDoc) :
-          Container(),
-        ],
-      )
     );
   }
 }

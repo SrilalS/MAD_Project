@@ -11,6 +11,12 @@ class StorageController{
     return await reference.getDownloadURL();
   }
 
+  Future<String> uploadPost(String fileName, File file) async{
+    final Reference reference = FirebaseStorage.instance.ref().child('postImages/' + fileName + '.png');
+    await reference.putFile(file);
+    return await reference.getDownloadURL();
+  }
+
   Future dLoad(){
 
   }

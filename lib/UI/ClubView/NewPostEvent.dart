@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,11 +17,18 @@ class NewPostEvent extends StatefulWidget {
 
 class _NewPostEventState extends State<NewPostEvent> {
   final StorageController storageController = new StorageController();
+  FirebaseFirestore fbase = FirebaseFirestore.instance;
   final photopicker = ImagePicker();
+
+  File photo;
+  String photoURL;
+
+  TextEditingController title = TextEditingController();
+  TextEditingController desc = TextEditingController();
+  TextEditingController link = TextEditingController();
   String type = 'Event';
   TimeOfDay time = TimeOfDay.now();
   DateTime date = DateTime.now();
-  File photo;
 
   Future getPhoto() async {
     final pickedFile = await photopicker.getImage(source: ImageSource.gallery);
@@ -64,131 +69,189 @@ class _NewPostEventState extends State<NewPostEvent> {
     });
   }
 
+  Widget switcher = Text(
+    'Save',
+    style: TextStyle(color: Colors.white),
+  );
+
+  Future uploadImage() async {
+    setState(() {
+      switcher = Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),);
+    });
+    try {
+      await storageController.uploadPost('Photo_'+ widget.clubDoc.id, photo).then((value){
+        photoURL = value;
+      }).then((value) => addEvent());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void addEvent() async{
+    await fbase.collection('HomeFeed').doc(widget.clubDoc.id).set({
+      'ClubID': widget.clubDoc.id,
+      'Title': title.text,
+      'Description': desc.text,
+      'Type': type,
+      'Photo': photoURL,
+      'Date': date.year.toString() +'-'+ date.month.toString() +'-'+ date.day.toString()+' '+time.hour.toString()+':'+time.minute.toString(),
+    }).then((value){
+      Get.back();
+      Get.snackbar(
+          'Success!',
+          'Post Saved!',
+          icon: Icon(Icons.cloud_done, color: Colors.white),
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Wrap(
-              spacing: 20, // to apply margin in the main axis of the wrap
-              runSpacing: 20, // to apply margin in the cross axis of the wrap
-              children: [
-                Text('New Event/Post' ,style: TextStyle(fontSize: 21),),
-                Row(
-                  children: [
-                    Text('Type: '),
-                    Radio(
-                      value: 'Event',
-                      groupValue: type,
-                      onChanged: (value) {
-                        setState(() {
-                          type = value;
-                        });
-                      },
-                    ),
-                    Text('Event '),
-
-                    Radio(
-                      value: 'Post',
-                      groupValue: type,
-                      onChanged: (value) {
-                        setState(() {
-                          type = value;
-                        });
-                      },
-                    ),
-                    Text('Post '),
-                  ],
-                ),
-
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder()),
-                ),
-                TextFormField(
-                  minLines: 3,
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                      labelText: 'Description',
-                      border: OutlineInputBorder()),
-                ),
-
-                Column(
-                  children: [
-                    Container(
-                      width: 128,
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4)),
-                        elevation: 4,
-                        onPressed: () {
-                          getPhoto();
+    return Hero(
+      tag: 'NEP',
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('New Event/Post'),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Wrap(
+                spacing: 20, // to apply margin in the main axis of the wrap
+                runSpacing: 20, // to apply margin in the cross axis of the wrap
+                children: [
+                  Row(
+                    children: [
+                      Text('Type: '),
+                      Radio(
+                        value: 'Event',
+                        groupValue: type,
+                        onChanged: (value) {
+                          setState(() {
+                            type = value;
+                          });
                         },
-                        child: Text('Select Photo'),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 128,
-                          width: 128,
-                          child: photo == null
-                              ? Text('Select Post/Event Photo')
-                              : Image.file(
-                            photo,
-                            fit: BoxFit.fitHeight,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                      Text('Event '),
 
+                      Radio(
+                        value: 'Post',
+                        groupValue: type,
+                        onChanged: (value) {
+                          setState(() {
+                            type = value;
+                          });
+                        },
+                      ),
+                      Text('Post '),
+                    ],
+                  ),
 
-                Visibility(
-                  visible: type == 'Event',
-                  child: TextFormField(
+                  TextFormField(
+                    controller: title,
                     decoration: InputDecoration(
-                        labelText: 'Link (if any)',
+                        labelText: 'Title',
                         border: OutlineInputBorder()),
                   ),
-                ),
-                Visibility(
-                  visible: type == 'Event',
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
-                    color: Colors.blue,
-                    child: Text(
+                  TextFormField(
+                    controller: desc,
+                    minLines: 3,
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                        labelText: 'Description',
+                        border: OutlineInputBorder()),
+                  ),
+
+                  Column(
+                    children: [
+                      Container(
+                        width: 128,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4)),
+                          elevation: 4,
+                          onPressed: () {
+                            getPhoto();
+                          },
+                          child: Text('Select Photo'),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 128,
+                            width: 128,
+                            child: photo == null
+                                ? Text('Select Post/Event Photo')
+                                : Image.file(
+                              photo,
+                              fit: BoxFit.fitHeight,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+
+
+                  Visibility(
+                    visible: type == 'Event',
+                    child: TextFormField(
+                      controller: link,
+                      decoration: InputDecoration(
+                          labelText: 'Link (if any)',
+                          border: OutlineInputBorder()),
+                    ),
+                  ),
+                  Visibility(
+                    visible: type == 'Event',
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      color: Colors.blue,
+                      child: Text(
                         'Time: '+time.hour.toString()+ ':'+ time.minute.toString(),
-                      style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: (){
+                        showTPicker();
+                      },
                     ),
-                    onPressed: (){
-                      showTPicker();
-                    },
                   ),
-                ),
-                Visibility(
-                  visible: type == 'Event',
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
-                    color: Colors.blue,
-                    child: Text(
-                      'Date: '+date.year.toString()+'-'+ date.month.toString()+'-'+ date.day.toString(),
-                      style: TextStyle(color: Colors.white),
+                  Visibility(
+                    visible: type == 'Event',
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      color: Colors.blue,
+                      child: Text(
+                        'Date: '+date.year.toString()+'-'+ date.month.toString()+'-'+ date.day.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: (){
+                        showDPicker();
+                      },
                     ),
-                    onPressed: (){
-                      showDPicker();
-                    },
                   ),
-                )
-              ],
+                  Container(
+                    height: 48,
+                    width: Get.width,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      color: Colors.blue,
+                      child: switcher,
+                      onPressed: (){
+                        uploadImage();
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

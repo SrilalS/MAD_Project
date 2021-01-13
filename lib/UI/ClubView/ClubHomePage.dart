@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 
@@ -49,12 +50,20 @@ class _ClubHomePageState extends State<ClubHomePage> {
                   ),
                 ],
               ),
-              AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                iconTheme: IconThemeData(
-                  color: Colors.black,
-                ),
+              Row(
+                children: [
+                  SafeArea(
+                    minimum: EdgeInsets.only(left: 8),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(64)
+                      ),
+                      onPressed: (){Get.back();},
+                      color: Colors.white,
+                      child: Icon(FeatherIcons.arrowLeft),
+                    ),
+                  )
+                ],
               ),
             ],
           ),
@@ -63,7 +72,7 @@ class _ClubHomePageState extends State<ClubHomePage> {
             children: [
               Text(
                 widget.clubDoc['Name'],
-                style: titleTexts(Colors.black, FontWeight.bold, 32),
+                style: titleTexts(Colors.black, FontWeight.bold, 24),
               )
             ],
           ),
