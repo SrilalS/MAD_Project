@@ -3,11 +3,19 @@ import 'package:flutter/rendering.dart';
 import 'package:mad_project/UI/Editprofile.dart';
 
 class Viewprofile extends StatelessWidget {
-  final String clubName;
-  final String description;
-  final String imgUrl;
+  final String name;
+  final String email;
+  final String faculty;
+  final String clublist;
+  final String imageUrl;
 
-  const Viewprofile({Key key, this.clubName, this.description, this.imgUrl})
+  const Viewprofile(
+      {Key key,
+      this.name,
+      this.email,
+      this.faculty,
+      this.clublist,
+      this.imageUrl})
       : super(key: key);
 
   Widget textfield({@required String hintText}) {
@@ -67,16 +75,16 @@ class Viewprofile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "Username",
+                        name,
                       ),
                       Text(
-                        "Email",
+                        email,
                       ),
                       Text(
-                        "Faculty",
+                        faculty,
                       ),
                       Text(
-                        "Registerd Clubs",
+                        clublist,
                       ),
                       Container(
                         height: 35,
@@ -86,7 +94,13 @@ class Viewprofile extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Editprofile()),
+                                  builder: (context) => Editprofile(
+                                        name: name,
+                                        email: email,
+                                        faculty: faculty,
+                                        clublist: clublist,
+                                        imageUrl: imageUrl,
+                                      )),
                             );
                           },
                           color: Colors.green,
@@ -119,7 +133,7 @@ class Viewprofile extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(clubName,
+                child: Text(name,
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1.5,
@@ -135,7 +149,7 @@ class Viewprofile extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   image: DecorationImage(
-                      image: NetworkImage(imgUrl), fit: BoxFit.fill),
+                      image: NetworkImage(imageUrl), fit: BoxFit.fill),
                 ),
               ),
             ],
