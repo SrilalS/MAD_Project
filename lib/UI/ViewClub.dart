@@ -63,8 +63,7 @@ class ViewClub extends StatelessWidget {
               children: [
                 Container(
 
-                  height: 300,
-                  width: double.infinity,
+                  
                   margin: EdgeInsets.symmetric(horizontal: 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
