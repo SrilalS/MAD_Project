@@ -1,4 +1,3 @@
-import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/models/models.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:mad_project/widgets/club_header.dart';
@@ -35,7 +34,7 @@ class _EventPageState extends State<EventPage> {
           title: Text(
             'Events',
             style: const TextStyle(
-              color: Palette.nsbmgreen,
+              color: Color(0xFF43A047),
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
               letterSpacing: -1.2,
