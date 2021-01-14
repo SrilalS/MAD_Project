@@ -28,9 +28,40 @@ class _AuthState extends State<Auth> {
       body: SafeArea(
         child: Column(
           children: [
+
             RaisedButton(
               
             )
+
+            mainLogo(),
+            Container(
+              height: 128,
+              width: Get.width*0.75,
+              child: Card(
+                shape: rShapeBorder(16),
+                elevation: 4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Sign In',
+                        style: titleTexts(Colors.grey.shade800, FontWeight.bold, 32)),
+                    Container(
+                      child: RaisedButton(
+                        color: Colors.blue,
+                        textTheme: ButtonTextTheme.primary,
+                        shape: rShapeBorder(32),
+                        child: switcher,
+                        onPressed: (){
+
+                          signInWithGoogle();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
           ],
         ),
       ),

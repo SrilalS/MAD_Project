@@ -44,7 +44,8 @@ import 'package:meta/meta.dart';
 //    };
 //  }
 //}
-class Post{
+class Post {
+
   final String caption;
   final String clubId;
   final String clubImage;
@@ -73,19 +74,18 @@ class Post{
       postId: json['postId'] ?? '',
 
     );
-
   }
-  Map<String, dynamic > toMap(){
-    return{
-
-      'caption':caption,
-      'clubId':clubId,
-      'clubImage':clubImage,
-      'clubName':clubName,
-
-      'imageUrl':imageUrl,
-      'postId':postId,
-
+  Map<String, dynamic> toMap() {
+    return {
+      'caption': caption,
+      'clubId': clubId,
+      'clubImage': clubImage,
+      'clubName': clubName,
+//
+      'imageUrl': imageUrl,
+      'postId': postId,
     };
   }
-}
+} // TODO Implement this library.
+
+

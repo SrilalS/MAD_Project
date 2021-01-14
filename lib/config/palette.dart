@@ -18,3 +18,4 @@ class Palette {
 //    colors: [Colors.transparent, Colors.black26],
 //  );
 }
+
