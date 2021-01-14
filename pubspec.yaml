@@ -10,22 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.0
   get: ^3.24.0
   dio: ^3.0.10
   flutter_feather_icons: ^1.0.3
-  firebase_core: ^0.5.3
-  firebase_auth: ^0.18.4+1
-  firebase_auth_oauth: ^0.2.2
-  cloud_firestore: ^0.14.4
-  firebase_storage: ^5.2.0
-  image_picker: ^0.6.7+20
+  firebase_core: ^0.7.0
+  firebase_auth: ^0.20.0+1
+  cloud_firestore: ^0.16.0
+  firebase_storage: ^7.0.0
+  image_picker: ^0.6.7+21
   google_sign_in: ^4.5.9
   cached_network_image: ^2.5.0
   get_storage: ^1.4.0
   onesignal_flutter: ^2.6.2
-  image_picker: ^0.6.7+14
-  permission_handler: ^5.0.1+1
 
 dev_dependencies:
   flutter_test:
