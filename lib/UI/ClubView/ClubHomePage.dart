@@ -76,6 +76,21 @@ class _ClubHomePageState extends State<ClubHomePage> {
               )
             ],
           ),
+          Card(
+            margin: EdgeInsets.all(16),
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.clubDoc['Description'],
+                    textAlign: TextAlign.justify,
+                  )
+                ],
+              ),
+            )
+          ),
           Padding(
               padding: EdgeInsets.all(8),
               child: StreamBuilder(

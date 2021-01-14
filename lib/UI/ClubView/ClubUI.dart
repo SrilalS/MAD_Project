@@ -27,7 +27,7 @@ class _ClubViewState extends State<ClubView> {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: 'CLUB',
+      tag: widget.clubDoc.id,
       child: Scaffold(
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: page,
@@ -40,7 +40,7 @@ class _ClubViewState extends State<ClubView> {
             items: [
               BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Club Home',),
               BottomNavigationBarItem(icon: Icon(FeatherIcons.alignCenter), label: 'Events'),
-              user['Admin'] ?
+              (user['Admin'] && user['Club'] == widget.clubDoc.id) ?
               BottomNavigationBarItem(icon: Icon(FeatherIcons.shield), label: 'Admin') :
               BottomNavigationBarItem(icon: Icon(FeatherIcons.plusCircle), label: 'Join')
 

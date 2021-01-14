@@ -57,7 +57,7 @@ class _ClubsListState extends State<ClubsList> {
                         ),
                       ),
                       Hero(
-                        tag: 'CLUB',
+                        tag: snapshot.data.docs[index].id,
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
