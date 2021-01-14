@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:mad_project/UI/Editprofile.dart';
 
-class Viewprofile extends StatelessWidget {
-  final String name;
-  final String email;
-  final String faculty;
-  final String clublist;
-  final String imageUrl;
+class ViewClub extends StatelessWidget {
+//  final String imagePath;
+  final String clubName;
+  final String description;
+  final String imgUrl;
 
-  const Viewprofile(
-      {Key key,
-      this.name,
-      this.email,
-      this.faculty,
-      this.clublist,
-      this.imageUrl})
+  const ViewClub({Key key, this.clubName, this.description, this.imgUrl})
       : super(key: key);
-
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -31,7 +21,7 @@ class Viewprofile extends StatelessWidget {
               color: Colors.black54,
               fontWeight: FontWeight.bold),
           fillColor: Colors.white30,
-          filled: true,
+          filled: false,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide.none),
@@ -74,34 +64,15 @@ class Viewprofile extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        name,
-                      ),
-                      Text(
-                        email,
-                      ),
-                      Text(
-                        faculty,
-                      ),
-                      Text(
-                        clublist,
-                      ),
+                      SizedBox(height: 60.0),
+                      Text(description),
+                      SizedBox(height: 70.0),
                       Container(
                         height: 35,
                         width: double.infinity,
                         child: RaisedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Editprofile(
-                                        name: name,
-                                        email: email,
-                                        faculty: faculty,
-                                        clublist: clublist,
-                                        imageUrl: imageUrl,
-                                      )),
-                            );
+                            print('update');
                           },
                           color: Colors.green,
                           child: Center(
@@ -121,19 +92,12 @@ class Viewprofile extends StatelessWidget {
               ],
             ),
           ),
-          // CustomPaint(
-          //   child: Container(
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height,
-          //   ),
-          //   painter: HeaderCurvedContainer(),
-          // ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text("View Profile",
+                child: Text(clubName,
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1.5,
@@ -149,7 +113,7 @@ class Viewprofile extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   image: DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.fill),
+                      image: NetworkImage(imgUrl), fit: BoxFit.fill),
                 ),
               ),
             ],
