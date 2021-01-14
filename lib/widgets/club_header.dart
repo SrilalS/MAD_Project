@@ -1,3 +1,16 @@
+
+//import 'package:mad_project/UI/event_screen.dart';
+//import 'package:mad_project/models/joinform_model.dart';
+//import 'package:mad_project/screens/event_screen.dart';
+import 'package:mad_project/UI/home_screen.dart';
+// import 'package:cplustraining/screens/join_screen.dart';
+import 'package:flutter/material.dart';
+//import 'package:mad_project/data/data.dart';
+//import 'package:mad_project/models/models.dart';
+
+class ClubHeader extends StatelessWidget {
+  final String clubName;
+
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:mad_project/UI/event_screen.dart';
@@ -24,12 +37,14 @@ class ClubHeader extends StatelessWidget {
  final String clubName;
 
 
+
   const ClubHeader({Key key, this.clubName}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
       color: Colors.white,
+
 
       child: Column(
         children:[
@@ -90,6 +105,7 @@ class ClubHeader extends StatelessWidget {
         ]
       ),
 
+
       child: Column(children: [
         const Divider(height: 10.0, thickness: 0.5),
         Container(
@@ -99,10 +115,11 @@ class ClubHeader extends StatelessWidget {
                 children: [
                   FlatButton.icon(
                       onPressed: () {
-                        //          Navigator.push(context,
-                        //     MaterialPageRoute(
-                        // builder:(context) => HomeScreen()
-                        //  ),);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                        );
                       },
                       icon: const Icon(
                         Icons.home,
@@ -143,3 +160,4 @@ class ClubHeader extends StatelessWidget {
     );
   }
 }
+
