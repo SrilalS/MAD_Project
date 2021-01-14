@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mad_project/Classes/GlobleData.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 
 class Profile extends StatefulWidget {
@@ -36,6 +38,20 @@ class _ProfileState extends State<Profile> {
     });
   }
 
+  QuerySnapshot clubsList;
+  bool loaded = false;
+
+  getClubsList(){
+    fstore.collection('Clubs').get().then((value){
+      setState(() {
+        clubsList = value;
+        loaded = true;
+      });
+    });
+  }
+
+
+
   saveProfile(){
     fstore.collection('Users').doc(fauth.currentUser.email).update({
       'Batch':batch,
@@ -46,6 +62,7 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     getProfile();
+    getClubsList();
     super.initState();
   }
 
@@ -261,6 +278,38 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
+              ),
+
+              Visibility(
+                visible: !editmode,
+                child: Column(
+                  children: [
+                    SizedBox(height: 16,),
+                    Text('My Clubs'),
+                    Container(
+                      height: Get.height * 0.5,
+                      child: ListView.builder(
+                        itemCount: user['Clubs'].length,
+                        itemBuilder: (context, index){
+
+                          if (clubsList != null){
+                            String name = clubsList.docs.where((element) => element.id == user['Clubs'][index]).first['Name'];
+                            return Card(
+                              margin: EdgeInsets.all(16),
+                              child: ListTile(
+                                title: Text(name),
+                              ),
+                            );
+                          } else {
+                            return LinearProgressIndicator();
+                          }
+
+
+                        },
+                      ),
+                    )
+                  ],
+                )
               )
             ],
           ),

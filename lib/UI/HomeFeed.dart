@@ -30,7 +30,7 @@ class _HomeFeedState extends State<HomeFeed> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: fstore.collection('HomeFeed').get().asStream(),
+      stream: fstore.collection('HomeFeed').orderBy('TIME',descending: true).get().asStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done ||
             qsnap.isBlank) {

@@ -78,7 +78,7 @@ class _AdminUIState extends State<AdminUI> {
   Future uploadCover() async {
     try {
       await storageController
-          .upload('Cover_' + widget.clubDoc.id, logo)
+          .upload('Cover_' + widget.clubDoc.id, cover)
           .then((value) {
         coverURL = value;
       }).then((value) => saveClub());

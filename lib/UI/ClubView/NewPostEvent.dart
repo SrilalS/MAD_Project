@@ -79,7 +79,7 @@ class _NewPostEventState extends State<NewPostEvent> {
       switcher = Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),);
     });
     try {
-      await storageController.uploadPost('Photo_'+ widget.clubDoc.id, photo).then((value){
+      await storageController.uploadPost('Photo_'+ DateTime.now().millisecondsSinceEpoch.toString(), photo).then((value){
         photoURL = value;
       }).then((value) => addEvent());
     } catch (e) {
@@ -88,7 +88,8 @@ class _NewPostEventState extends State<NewPostEvent> {
   }
 
   void addEvent() async{
-    await fbase.collection('HomeFeed').doc(widget.clubDoc.id).set({
+    await fbase.collection('HomeFeed').add({
+      'TIME': DateTime.now().millisecondsSinceEpoch,
       'ClubID': widget.clubDoc.id,
       'Title': title.text,
       'Description': desc.text,
