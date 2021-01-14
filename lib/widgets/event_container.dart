@@ -1,7 +1,5 @@
-
 import 'package:mad_project/models/models.dart';
 import 'package:mad_project/UI/club_screen.dart';
-
 import 'package:mad_project/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -117,7 +115,6 @@ final String clubName;
               child: RaisedButton(
                 color: Colors.blue[400],
                 onPressed: () {
-
                   Navigator.push(context,
                     MaterialPageRoute(
                         builder:(context) => ClubPage(clubName: clubName,)

@@ -1,13 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mad_project/Styles/TextStyles.dart';
-import 'package:mad_project/UI/AuthWidgets/MainLogo.dart';
-
-import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
-import 'package:mad_project/UI/Home.dart';
 
 class Auth extends StatefulWidget {
   @override
@@ -16,56 +10,29 @@ class Auth extends StatefulWidget {
 
 class _AuthState extends State<Auth> {
 
-  Widget switcher = Text('SignIn With Google');
+  Future<UserCredential> signInWithGoogle() async {
+    await Firebase.initializeApp();
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-  void signInWithGoogle() async {
-    setState(() {
-      switcher = Container(
-        height: 28,
-        width: 28,
-        child: CircularProgressIndicator(backgroundColor: Colors.white),
-      );
-    });
-    try {
-      GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      GoogleAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential).then((value){
-        print(value.user.email);
-        Get.off(Home());
-      });
-    } catch (e) {
-      Get.snackbar(
-        'SignIn Failed!',
-        'SignIn Failed please retry',
-        backgroundColor: Colors.redAccent,
-        colorText: Colors.white,
-        icon: Icon(Icons.error, color: Colors.white,),
-      );
-      setState(() {
-        switcher = Text('SignIn with Google');
-      });
-      print(e);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
+    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
-          child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+
+            RaisedButton(
+              
+            )
+
             mainLogo(),
             Container(
               height: 128,
@@ -85,7 +52,7 @@ class _AuthState extends State<Auth> {
                         shape: rShapeBorder(32),
                         child: switcher,
                         onPressed: (){
-						//SXN
+
                           signInWithGoogle();
                         },
                       ),
@@ -97,7 +64,7 @@ class _AuthState extends State<Auth> {
 
           ],
         ),
-      )),
+      ),
     );
   }
 }

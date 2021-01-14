@@ -12,12 +12,6 @@ class DatabaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
 //   FirebaseFirestore reference = FirebaseFirestore.instance;
-  AuthUser _userFromFirebaseUser(User user) {
-    return user != null ? AuthUser(uid: user.uid) : null;
-  }
-
-  Future signInAnon() async {
-
   AuthUser _userFromFirebaseUser(User user){
     return user != null ? AuthUser(uid: user.uid): null;
   }
@@ -117,6 +111,7 @@ class DatabaseService {
   }
   Future<void> deleteEvent(String postId){
     return _db.collection('Events').doc(postId).delete();
+
     FirebaseFirestore reference = FirebaseFirestore.instance;
 
   Future<void> setPost(Post post) {
@@ -126,7 +121,6 @@ class DatabaseService {
 
   Future<void> deletePost(String postId) {
     return _db.collection('post').doc(postId).delete();
-
   }
 
   Stream<List<Post>> getPostfromPostCollection() {
@@ -146,6 +140,8 @@ class DatabaseService {
 
 
 }
+
+
 
 
   Stream<List<Post>> getPostfromclubName(String clubName) {
@@ -170,3 +166,4 @@ class DatabaseService {
             snapshot.docs.map((doc) => Post.fromJson(doc.data())).toList());
   }
 }
+

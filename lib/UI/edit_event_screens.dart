@@ -8,36 +8,39 @@ import 'package:mad_project/config/palette.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
+import 'package:mad_project/widgets/loading.dart';
 
 class EditEventPage extends StatefulWidget {
   final String postId;
   final String clubImage;
   final String clubName;
+  final String clubId;
   final String caption;
   final String imageUrl;
 
-  EditEventPage(this.postId, this.clubImage, this.clubName, this.caption, this.imageUrl);
+  EditEventPage(this.postId, this.clubImage, this.clubName, this.caption, this.imageUrl, this.clubId);
 
 
 
   @override
-  _EditEventPageState createState() => _EditEventPageState(postId,clubImage,clubName,caption,imageUrl);
+  _EditEventPageState createState() => _EditEventPageState(postId,clubImage,clubName,caption,imageUrl,clubId,);
 }
 
 class _EditEventPageState extends State<EditEventPage> {
   final _formKey =GlobalKey<FormState>();
 
   String error = '';
-  String clubId;
+  final String clubId;
   DateTime date;
   final String postId;
   final String clubImage;
   final String clubName;
   String caption;
   String imageUrl;
+    bool loading = false;
 
 
-  _EditEventPageState(this.postId, this.clubImage, this.clubName, this.caption, this.imageUrl);
+  _EditEventPageState(this.postId, this.clubImage, this.clubName, this.caption, this.imageUrl, this.clubId);
 
 
 
@@ -46,6 +49,7 @@ class _EditEventPageState extends State<EditEventPage> {
 
   @override
   Widget build(BuildContext context) {
+     Size size = MediaQuery.of(context).size;
     return  Scaffold(
       backgroundColor: Colors.blue[100],
       appBar:AppBar(
@@ -58,9 +62,9 @@ class _EditEventPageState extends State<EditEventPage> {
               Navigator.of(context).pop();
             }),
         brightness: Brightness.light,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: Text(
-          'Edit Post',
+          'Edit Event',
           style: const TextStyle(
             color:Palette.nsbmgreen,
             fontSize: 28.0,
@@ -108,33 +112,66 @@ class _EditEventPageState extends State<EditEventPage> {
                       },
                     ),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.blue[700],
-                        child: Text(
-                          'Add Image',
-                          style: TextStyle(
-                              color: Colors.white
+                       Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: size.width * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(29),
+                        child: FlatButton(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          color: Colors.blue,
+                          onPressed: () async{
+                            setState(() {
+                              loading = true;
+                            });
+                            dynamic result =await uploadImage();
+                            if(result == null){
+                              setState(() {
+                                loading = false;
+                              });
+                            }
+
+
+
+                          },
+                          child: Text(
+                            'Add Image',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        onPressed: () async{
-                          uploadImage();
-                        }
+                      ),
                     ),
-
-                    SizedBox(height: 20.0),
+                      SizedBox(height: 20.0),
                     (imageUrl != null)
                         ? Image.network(imageUrl)
-                        : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
+                        : loading ? Loading():Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
+                    // RaisedButton(
+                    //     color: Colors.blue[700],
+                    //     child: Text(
+                    //       'Add Image',
+                    //       style: TextStyle(
+                    //           color: Colors.white
+                    //       ),
+                    //     ),
+                    //     onPressed: () async{
+                    //       uploadImage();
+                    //     }
+                    // ),
+
+                    // SizedBox(height: 20.0),
+                    // (imageUrl != null)
+                    //     ? Image.network(imageUrl)
+                    //     : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.blue[700],
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: Colors.white
-                          ),
-                        ),
-                        onPressed: () async{
+                     Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: size.width * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(29),
+                        child: FlatButton(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          color: Colors.blue,
+                         onPressed: () async{
                           DatabaseService().setEvent(caption, imageUrl, "dramaclub",postId , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
 
                           Navigator.push(context,
@@ -142,8 +179,32 @@ class _EditEventPageState extends State<EditEventPage> {
                                 builder:(context) => NavScreen()
                             ),);
 
-                        }
+                        },
+                          child: Text(
+                            'Edit Event',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
+                    // RaisedButton(
+                    //     color: Colors.blue[700],
+                    //     child: Text(
+                    //       'Submit',
+                    //       style: TextStyle(
+                    //           color: Colors.white
+                    //       ),
+                    //     ),
+                    //     onPressed: () async{
+                    //       DatabaseService().setEvent(caption, imageUrl, "dramaclub",postId , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+
+                    //       Navigator.push(context,
+                    //         MaterialPageRoute(
+                    //             builder:(context) => NavScreen()
+                    //         ),);
+
+                    //     }
+                    // ),
                     SizedBox(height: 12.0),
                     Text(
                       error,

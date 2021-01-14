@@ -12,7 +12,6 @@ class ClubHeader extends StatelessWidget {
   final String clubName;
 
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:mad_project/UI/event_screen.dart';
 import 'package:mad_project/models/joinform_model.dart';
 // import 'package:mad_project/screens/event_screen.dart';
@@ -20,22 +19,11 @@ import 'package:mad_project/UI/home_screen.dart';
 // import 'package:cplustraining/screens/join_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:mad_project/data/data.dart';
-
-import 'package:mad_project/UI/event_screens.dart';
-
-// import 'package:mad_project/screens/event_screen.dart';
-//import 'package:mad_project/UI/home_screen.dart';
-// import 'package:cplustraining/screens/join_screen.dart';
-import 'package:flutter/material.dart';
-
-
 import 'package:mad_project/models/models.dart';
 import 'package:mad_project/widgets/profile_avatar.dart';
 
 class ClubHeader extends StatelessWidget {
-
  final String clubName;
-
 
 
   const ClubHeader({Key key, this.clubName}) : super(key: key);
@@ -44,7 +32,6 @@ class ClubHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
       color: Colors.white,
-
 
       child: Column(
         children:[
@@ -157,6 +144,7 @@ class ClubHeader extends StatelessWidget {
                   const VerticalDivider(width: 8.0),
                 ]))
       ]),
+
     );
   }
 }
