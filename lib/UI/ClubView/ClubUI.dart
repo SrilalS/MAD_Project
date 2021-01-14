@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
+import 'package:mad_project/Classes/GlobleData.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 import 'package:mad_project/UI/ClubView/AdminUI.dart';
 import 'package:mad_project/UI/ClubView/ClubEvents.dart';
@@ -39,7 +40,7 @@ class _ClubViewState extends State<ClubView> {
             items: [
               BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Club Home',),
               BottomNavigationBarItem(icon: Icon(FeatherIcons.alignCenter), label: 'Events'),
-              isAdmin ?
+              user['Admin'] ?
               BottomNavigationBarItem(icon: Icon(FeatherIcons.shield), label: 'Admin') :
               BottomNavigationBarItem(icon: Icon(FeatherIcons.plusCircle), label: 'Join')
 
@@ -56,7 +57,7 @@ class _ClubViewState extends State<ClubView> {
             children: [
               ClubHomePage(clubDoc: widget.clubDoc),
               ClubEvents(clubDoc: widget.clubDoc),
-              isAdmin ? AdminUI(clubDoc: widget.clubDoc) :
+              (user['Admin'] && user['Club'] == widget.clubDoc.id) ? AdminUI(clubDoc: widget.clubDoc) :
               Container(),
             ],
           )

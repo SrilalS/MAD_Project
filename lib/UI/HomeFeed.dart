@@ -57,9 +57,10 @@ class _HomeFeedState extends State<HomeFeed> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(4),
-                            height: 64,
+                            padding: const EdgeInsets.all(8),
+                            height: 72,
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 ClipOval(
@@ -70,19 +71,39 @@ class _HomeFeedState extends State<HomeFeed> {
                                     imageUrl: qsnap.docs.where((element) => element.id == snapshot.data.docs[index]['ClubID']).first['Logo'],
                                   ),
                                 ),
-                                Text(
-                                  ' '
-                                      +snapshot.data.docs[index]['Title'],
-                                      style: titleTexts(
-                                      Colors.black, FontWeight.normal, 16),
+                                SizedBox(width: 4),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(4),
+                                      child: Container(
+                                        width: 256,
+                                        child: Text(
+                                          snapshot.data.docs[index]['Title'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          softWrap: false,
+                                          style: titleTexts(
+                                              Colors.black, FontWeight.normal, 16),
+                                        ),
+                                      )
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text('by '+qsnap.docs.where((element) => element.id == snapshot.data.docs[index]['ClubID']).first['Name'])
+                                        ],),
+                                    ),
+                                  ],
                                 ),
+
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Text(qsnap.docs.where((element) => element.id == snapshot.data.docs[index]['ClubID']).first['Name']),
-                          ),
+
                           Padding(
                             padding: const EdgeInsets.all(4),
                             child: Text(snapshot.data.docs[index]['Description']),

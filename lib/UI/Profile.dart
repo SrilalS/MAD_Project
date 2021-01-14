@@ -27,8 +27,9 @@ class _ProfileState extends State<Profile> {
       } else {
         fstore.collection('Users').doc(fauth.currentUser.email).set({
           'Admin':false,
-          'Batch':'Faculty of Computing',
-          'Faculty':'19.1',
+          'Club':'',
+          'Batch':'19.1',
+          'Faculty':'Faculty of Computing',
           'Clubs': [],
         });
       }
@@ -36,7 +37,7 @@ class _ProfileState extends State<Profile> {
   }
 
   saveProfile(){
-    fstore.collection('Users').doc(fauth.currentUser.email).set({
+    fstore.collection('Users').doc(fauth.currentUser.email).update({
       'Batch':batch,
       'Faculty':faculty,
     });

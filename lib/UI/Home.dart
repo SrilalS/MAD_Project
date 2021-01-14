@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:mad_project/Classes/GlobleData.dart';
 import 'package:mad_project/UI/ClubsList.dart';
 import 'package:mad_project/UI/HomeFeed.dart';
 import 'package:mad_project/UI/Profile.dart';
@@ -17,6 +19,8 @@ class _HomeState extends State<Home> {
   PageController pageController = new PageController();
   List<String> pageNames = ['Home','Clubs','Profile'];
 
+  FirebaseFirestore fstore = FirebaseFirestore.instance;
+
   void isLogged() async {
     await Firebase.initializeApp();
     if (FirebaseAuth.instance.currentUser != null) {
@@ -24,6 +28,28 @@ class _HomeState extends State<Home> {
     } else {
       print('Logged Out');
     }
+  }
+
+  void setUser(){
+    fstore.collection('Users').doc(FirebaseAuth.instance.currentUser.email).get().then((value){
+      if (value.exists){
+        user = value;
+      } else {
+        fstore.collection('Users').doc(FirebaseAuth.instance.currentUser.email).set({
+          'Admin':false,
+          'Club':'',
+          'Batch':'Faculty of Computing',
+          'Faculty':'19.1',
+          'Clubs': [],
+        });
+      }
+
+    });
+  }
+  @override
+  void initState() {
+    setUser();
+    super.initState();
   }
 
   @override

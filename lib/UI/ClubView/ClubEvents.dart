@@ -31,8 +31,15 @@ class _ClubEventsState extends State<ClubEvents> {
                 builder: (context, snapshot) {
 
                   if (snapshot.connectionState != ConnectionState.done){
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return SafeArea(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Center(
+                            child: LinearProgressIndicator(),
+                          )
+                        ],
+                      ),
                     );
                   }
 
