@@ -33,7 +33,7 @@ class _ClubsListState extends State<ClubsList> {
           itemBuilder: (context,index){
             return Container(
               width: Get.width,
-              height: 256,
+              height: 300,
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Card(
