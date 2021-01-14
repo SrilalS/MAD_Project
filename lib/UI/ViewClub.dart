@@ -35,7 +35,7 @@ class ViewClub extends StatelessWidget {
 
       appBar: AppBar(
         elevation: 0.0,
-        
+        backgroundColor: Color(0xFF00B0FF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
