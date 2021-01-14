@@ -25,7 +25,7 @@ class _EventPageState extends State<EventPage> {
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: Palette.facebookBlue,
+                color: Color(0xFF1777F2),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
