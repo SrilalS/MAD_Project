@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ViewClub extends StatelessWidget {
+class AdminViewClub extends StatefulWidget {
 //  final String imagePath;
   final String clubName;
   final String description;
   final String imgUrl;
 
-  const ViewClub({Key key, this.clubName, this.description, this.imgUrl}) : super(key: key);
+  const AdminViewClub({Key key, this.clubName, this.description, this.imgUrl})
+      : super(key: key);
+
+  @override
+  _AdminViewClubState createState() =>
+      _AdminViewClubState(clubName, description, imgUrl);
+}
+
+class _AdminViewClubState extends State<AdminViewClub> {
+  final String clubName;
+  final String description;
+  final String imgUrl;
+  _AdminViewClubState(this.clubName, this.description, this.imgUrl);
   Widget textfield({@required String hintText}) {
     return Material(
       elevation: 30,
@@ -32,7 +45,6 @@ class ViewClub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Color(0xFF00B0FF),
@@ -42,7 +54,6 @@ class ViewClub extends StatelessWidget {
         ),
       ),
       body: Stack(
-
         alignment: Alignment.center,
         children: [
           CustomPaint(
@@ -55,12 +66,10 @@ class ViewClub extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-
               //  crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-
                   height: 300,
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 0),
@@ -68,14 +77,14 @@ class ViewClub extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height: 60.0),
-                      Text(description),
+                      Text(widget.description),
                       SizedBox(height: 70.0),
                       Container(
                         height: 35,
                         width: double.infinity,
                         child: RaisedButton(
                           onPressed: () {
-                            print('update');
+                            dialogTest(clubName, description, imgUrl);
                           },
                           color: Colors.green,
                           child: Center(
@@ -95,13 +104,12 @@ class ViewClub extends StatelessWidget {
               ],
             ),
           ),
-
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(clubName,
+                child: Text(widget.clubName,
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1.5,
@@ -117,9 +125,7 @@ class ViewClub extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   image: DecorationImage(
-                   image: NetworkImage(imgUrl),
-                    fit: BoxFit.fill
-                  ),
+                      image: NetworkImage(widget.imgUrl), fit: BoxFit.fill),
                 ),
               ),
             ],
@@ -132,6 +138,67 @@ class ViewClub extends StatelessWidget {
     );
   }
 
+  void dialogTest(
+    String clubName,
+    String description,
+    String imageUrl,
+  ) {
+    Get.dialog(AlertDialog(
+        title: Text(
+          'Edit Club Details',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                  width: Get.width, height: 50, child: Image.network(imageUrl)),
+              TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    clubName = value;
+                  });
+                },
+                initialValue: clubName,
+                decoration: InputDecoration(
+                    hintText: clubName,
+                    labelText: 'Club Name',
+                    border: OutlineInputBorder()),
+              ),
+              SizedBox(height: 24),
+              TextFormField(
+                initialValue: description,
+                decoration: InputDecoration(
+                    hintText: description,
+                    labelText: "Description",
+                    border: OutlineInputBorder()),
+                onChanged: (value) {
+                  setState(() {
+                    description = value;
+                  });
+                },
+              ),
+              SizedBox(height: 32),
+              Container(
+                height: 48,
+                width: Get.width,
+                child: RaisedButton(
+                  padding: const EdgeInsets.all(8.0),
+                  textColor: Colors.white,
+                  color: Colors.blueGrey[400],
+                  child: new Text("ADD"),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100)),
+                  onPressed: () {
+                    // Navigator.pop(context);
+                  },
+                ),
+              )
+            ],
+          ),
+        )));
+  }
 }
 
 class HeaderCurvedContainer extends CustomPainter {

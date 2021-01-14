@@ -72,6 +72,7 @@ class _AdminEventScreenState extends State<AdminEventScreen> {
                           clubImage: snapshot.data[index].clubImage,
                           clubName: snapshot.data[index].clubName,
                           postId: snapshot.data[index].postId,
+                          clubId: snapshot.data[index].clubId,
                         );
                       }
                   );

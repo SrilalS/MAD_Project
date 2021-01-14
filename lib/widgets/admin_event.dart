@@ -12,8 +12,9 @@ class AdminEventContainer extends StatelessWidget {
   final String clubImage;
   final String clubName;
   final String postId;
+  final String clubId;
 
-  const AdminEventContainer({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId}) : super(key: key);
+  const AdminEventContainer({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId, this.clubId}) : super(key: key);
 
 
   @override
@@ -53,6 +54,7 @@ class AdminEventContainer extends StatelessWidget {
                 clubImage: clubImage,
                 clubName: clubName,
                 postId: postId,
+                clubId: clubId,
               ),
             )
           ],
@@ -111,8 +113,9 @@ class _postStats extends StatelessWidget {
   final String clubImage;
   final String clubName;
   final String postId;
+  final String clubId;
 
-  const _postStats({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId}) : super(key: key);
+  const _postStats({Key key, this.caption, this.imageUrl, this.clubImage, this.clubName, this.postId, this.clubId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +140,7 @@ class _postStats extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                       MaterialPageRoute(
-                          builder:(context) => EditEventPage(postId,clubImage,clubName,caption,imageUrl)
+                          builder:(context) => EditEventPage(postId,clubImage,clubName,clubId,caption,imageUrl)
                       ),);
 
 

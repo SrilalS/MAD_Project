@@ -32,6 +32,7 @@ class _EditPostPageState extends State<EditPostPage> {
   final String clubName;
   String caption;
   String imageUrl;
+    bool loading = false;
 
   _EditPostPageState(this.postId, this.clubImage, this.clubName, this.caption, this.imageUrl);
 
@@ -39,6 +40,7 @@ class _EditPostPageState extends State<EditPostPage> {
 
   @override
   Widget build(BuildContext context) {
+      Size size = MediaQuery.of(context).size;
     return  Scaffold(
       backgroundColor: Colors.blue[100],
       appBar:AppBar(
@@ -101,42 +103,89 @@ class _EditPostPageState extends State<EditPostPage> {
                       },
                     ),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.blue[700],
-                        child: Text(
-                          'Add Image',
-                          style: TextStyle(
-                              color: Colors.white
-                          ),
-                        ),
-                        onPressed: () async{
-                          uploadImage();
-                        }
+                    Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  width: size.width * 0.8,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(29),
+                    child: FlatButton(
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                      color: Colors.blue,
+                      onPressed: () async{
+                  setState(() {
+                  loading = true;
+                  });
+                  dynamic result =await uploadImage();
+                  if(result == null){
+                  setState(() {
+                  loading = false;
+                  });
+                  }
+
+
+
+                  },
+                      child: Text(
+                        'Add Image',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
+                  ),
+                ),
 
                     SizedBox(height: 20.0),
                     (imageUrl != null)
                         ? Image.network(imageUrl)
                         : Placeholder(fallbackHeight: 150.0,fallbackWidth: double.infinity, color: Colors.transparent,),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.blue[700],
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: Colors.white
+                     Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: size.width * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(29),
+                        child: FlatButton(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          color: Colors.blue,
+                          onPressed: () async{
+                            if(caption != null || imageUrl != null){
+                              DatabaseService().setPost(caption, imageUrl, clubId,Uuid().v1() , clubImage, clubName, DateTime.now());
+
+                              Navigator.push(context,
+                                MaterialPageRoute(
+                                    builder:(context) => NavScreen()
+                                ),);
+                            }
+                            else{
+                              error = "Add caption or image";
+                            }
+
+
+                          },
+                          child: Text(
+                          'Add Post',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        onPressed: () async{
-                          DatabaseService().setPost(caption, imageUrl, "dramaclub",postId , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
-
-                          Navigator.push(context,
-                            MaterialPageRoute(
-                                builder:(context) => NavScreen()
-                            ),);
-
-                        }
+                      ),
                     ),
+                    // RaisedButton(
+                    //     color: Colors.blue[700],
+                    //     child: Text(
+                    //       'Submit',
+                    //       style: TextStyle(
+                    //           color: Colors.white
+                    //       ),
+                    //     ),
+                    //     onPressed: () async{
+                    //       DatabaseService().setPost(caption, imageUrl, "dramaclub",postId , "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png", "Dancing Club", DateTime.now());
+
+                    //       Navigator.push(context,
+                    //         MaterialPageRoute(
+                    //             builder:(context) => NavScreen()
+                    //         ),);
+
+                    //     }
+                    // ),
                     SizedBox(height: 12.0),
                     Text(
                       error,

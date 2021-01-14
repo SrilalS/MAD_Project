@@ -18,7 +18,7 @@ class _NavScreenState extends State<NavScreen> {
     HomeScreen(),
       AdminPage(),
     AddPost(),
-    ViewClub(clubName: "Drama cleub",description: "desc",imgUrl: "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png",),
+    AdminViewClub(clubName: "Drama cleub",description: "desc",imgUrl: "https://www.nsbm.ac.lk/wp-content/uploads/2019/08/footer_logo.png",),
       AdminEventScreen(),
 
   ];
