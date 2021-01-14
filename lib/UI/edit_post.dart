@@ -53,7 +53,7 @@ class _EditPostPageState extends State<EditPostPage> {
               Navigator.of(context).pop();
             }),
         brightness: Brightness.light,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: Text(
           'Edit Post',
           style: const TextStyle(
