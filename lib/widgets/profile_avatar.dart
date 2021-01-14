@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:mad_project/config/palette.dart';
+// import 'package:mad_project/config/palette.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final String imageUrl;
@@ -19,7 +19,7 @@ class ProfileAvatar extends StatelessWidget {
       children: <Widget>[
         CircleAvatar(
           radius: 20.0,
-          backgroundColor: Palette.facebookBlue,
+          backgroundColor: Color(0xFF1777F2),
           child: CircleAvatar(
             radius: hasBorder ? 17.0 : 20.0,
             backgroundColor: Colors.grey[200],
@@ -36,7 +36,7 @@ class ProfileAvatar extends StatelessWidget {
                   height: 15.0,
                   width: 15.0,
                   decoration: BoxDecoration(
-                      color: Palette.online,
+                      color: Color(0xFF4BCB1F),
                       shape: BoxShape.circle,
                       border: Border.all(
                         width: 2.0,
