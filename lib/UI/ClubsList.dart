@@ -56,7 +56,7 @@ class _ClubsListState extends State<ClubsList> {
                           ],
                         ),
                       ),
-                      Material(
+                     Material(
                         color: Colors.transparent,
                         child: InkWell(
                           splashColor: Colors.blue,
