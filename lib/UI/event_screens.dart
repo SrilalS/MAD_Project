@@ -1,32 +1,25 @@
 import 'package:mad_project/config/palette.dart';
-
-import 'package:mad_project/models/post_model.dart';
-//import 'package:mad_project/data/data.dart';
-//import 'package:mad_project/models/models.dart';
-
+import 'package:mad_project/models/models.dart';
 import 'package:mad_project/services/database_service.dart';
 import 'package:mad_project/widgets/club_header.dart';
-import 'package:mad_project/widgets/club_post_container.dart';
-// import 'package:mad_project/widgets/create_post_container.dart';
 
-import 'package:mad_project/widgets/post_container.dart';
+import 'package:mad_project/widgets/event_container.dart';
 import 'package:flutter/material.dart';
 
-class ClubPage extends StatefulWidget {
+class EventPage extends StatefulWidget {
   final String clubName;
 
-  const ClubPage({Key key, this.clubName}) : super(key: key);
+  const EventPage({Key key, this.clubName}) : super(key: key);
   @override
-  _ClubPageState createState() => _ClubPageState(clubName);
+  _EventPageState createState() => _EventPageState(clubName);
 }
 
-class _ClubPageState extends State<ClubPage> {
+class _EventPageState extends State<EventPage> {
   final String clubName;
 
-  _ClubPageState(this.clubName);
+  _EventPageState(this.clubName);
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -40,19 +33,14 @@ class _ClubPageState extends State<ClubPage> {
           brightness: Brightness.light,
           backgroundColor: Colors.white,
           title: Text(
-            clubName,
+            'Events',
             style: const TextStyle(
-
               color: Palette.nsbmgreen,
-
-              color:Palette.nsbmgreen,
-
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
               letterSpacing: -1.2,
             ),
           ),
-
         ),
         body: Column(
           children: [
@@ -62,21 +50,18 @@ class _ClubPageState extends State<ClubPage> {
             Expanded(
               flex: 1,
               child: StreamBuilder<List<Post>>(
-                stream: DatabaseService().getPostfromclubName(clubName),
-
+                stream: DatabaseService().getEventfromclubName(clubName),
                 builder: (context, snapshot) {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
-                        return ClubPostContainer(
+                        return EventContainer(
                           caption: snapshot.data[index].caption,
                           imageUrl: snapshot.data[index].imageUrl,
                           clubImage: snapshot.data[index].clubImage,
                           clubName: snapshot.data[index].clubName,
-
                         );
-                      }
-                  );
+                      });
                 },
               ),
             )
