@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 class AdminViewClub extends StatefulWidget {
 //  final String imagePath;
   final String clubName;
-  final String des;
+  final String description;
   final String imgUrl;
 
-  const AdminViewClub({Key key, this.clubName, this.des, this.imgUrl})
+  const AdminViewClub({Key key, this.clubName, this.description, this.imgUrl})
       : super(key: key);
 
   @override
   _AdminViewClubState createState() =>
-      _AdminViewClubState(clubName, des, imgUrl);
+      _AdminViewClubState(clubName, description, imgUrl);
 }
 
 class _AdminViewClubState extends State<AdminViewClub> {
@@ -77,7 +77,7 @@ class _AdminViewClubState extends State<AdminViewClub> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height: 60.0),
-                      Text(widget.des),
+                      Text(widget.description),
                       SizedBox(height: 70.0),
                       Container(
                         height: 35,
