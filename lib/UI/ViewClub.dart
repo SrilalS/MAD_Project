@@ -92,7 +92,20 @@ class ViewClub extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.w600)),
               ),
-             
+              Container(
+                padding: EdgeInsets.all(10.0),
+                width: MediaQuery.of(context).size.width / 2,
+                height: MediaQuery.of(context).size.height - 430,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 5),
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  image: DecorationImage(
+                   image: NetworkImage(imgUrl),
+                    fit: BoxFit.fill
+                  ),
+                ),
+              ),
             ],
           ),
           Padding(
