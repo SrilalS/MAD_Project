@@ -48,7 +48,7 @@ Container(
                             alignment: AlignmentDirectional.bottomEnd,
                             children: [
                                CachedNetworkImage(
-                              fit: BoxFit.fitWidth,
+                              fit: BoxFit.fitHeight,
                                width:Get.width,
                                height: Get.height,
                                imageUrl:imageUrl ,
@@ -64,15 +64,15 @@ Container(
                             
                             ),
                             
-                           FlatButton(onPressed:(){
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) =>ViewClub(clubName: 'Dancing Club',description: 'Description',
-                                  imgUrl: 'https://firebasestorage.googleapis.com/v0/b/mad-project-8569b.appspot.com/o/ClubImages%2Freligious.jpg?alt=media&token=914f6411-1f94-4bea-b5ad-b5242a428b6d',
-                                  ) ,
-                                  ));
-                              },
-                             child:Text("view")
-                             )
+                          //  FlatButton(onPressed:(){
+                          //       Navigator.push(context, MaterialPageRoute(
+                          //         builder: (context) =>ViewClub(clubName: 'Dancing Club',description: 'Description',
+                          //         imgUrl: 'https://firebasestorage.googleapis.com/v0/b/mad-project-8569b.appspot.com/o/ClubImages%2Freligious.jpg?alt=media&token=914f6411-1f94-4bea-b5ad-b5242a428b6d',
+                          //         ) ,
+                          //         ));
+                          //     },
+                          //    child:Text("view")
+                          //    )
                             
                            
 
