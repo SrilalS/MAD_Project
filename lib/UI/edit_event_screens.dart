@@ -62,7 +62,7 @@ class _EditEventPageState extends State<EditEventPage> {
               Navigator.of(context).pop();
             }),
         brightness: Brightness.light,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: Text(
           'Edit Event',
           style: const TextStyle(
