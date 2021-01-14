@@ -23,7 +23,7 @@ class EditEventPage extends StatefulWidget {
 
 
   @override
-  _EditEventPageState createState() => _EditEventPageState(postId,clubImage,clubName,clubId,caption,imageUrl);
+  _EditEventPageState createState() => _EditEventPageState(postId,clubImage,clubName,caption,imageUrl,clubId,);
 }
 
 class _EditEventPageState extends State<EditEventPage> {
