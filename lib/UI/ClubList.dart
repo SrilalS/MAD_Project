@@ -48,7 +48,7 @@ Container(
                             alignment: AlignmentDirectional.bottomEnd,
                             children: [
                                CachedNetworkImage(
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.fill,
                                width:Get.width,
                                height: Get.height,
                                imageUrl:imageUrl ,
