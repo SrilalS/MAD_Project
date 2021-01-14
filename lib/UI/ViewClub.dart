@@ -100,10 +100,7 @@ class ViewClub extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 5),
                   shape: BoxShape.circle,
                   color: Colors.white,
-                  image: DecorationImage(
-                   image: NetworkImage(imgUrl),
-                    fit: BoxFit.fill
-                  ),
+                  
                 ),
               ),
             ],
