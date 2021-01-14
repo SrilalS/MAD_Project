@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
-  get: ^3.22.2
+  get: ^3.24.0
   dio: ^3.0.10
   flutter_feather_icons: ^1.0.3
   firebase_core: ^0.5.3
@@ -19,7 +19,8 @@ dependencies:
   firebase_auth_oauth: ^0.2.2
   cloud_firestore: ^0.14.4
   firebase_storage: ^5.2.0
-  google_sign_in: ^4.5.6
+  image_picker: ^0.6.7+20
+  google_sign_in: ^4.5.9
   cached_network_image: ^2.5.0
   get_storage: ^1.4.0
   onesignal_flutter: ^2.6.2
