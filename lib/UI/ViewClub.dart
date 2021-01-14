@@ -71,7 +71,7 @@ class ViewClub extends StatelessWidget {
                     children: [
                       SizedBox(height: 60.0),
                       Text(description),
-                      SizedBox(height: 70.0),
+                      SizedBox(height: 80.0),
                     
                     ],
                   ),
