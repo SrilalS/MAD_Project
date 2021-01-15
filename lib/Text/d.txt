@@ -11,7 +11,7 @@ class _DtestState extends StateDtest {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar AppBar(
-        title Text(Club Details),
+        title Text(Details of the club),
         backgroundColor Color(0xFF90A4AE),
       ),
       body Center(
