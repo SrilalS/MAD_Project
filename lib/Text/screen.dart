@@ -7,7 +7,11 @@ import 'package:flutter/material.dart';
 
 class ClubPage extends StatefulWidget {
   final String clubName;
-
+  final String postId;
+  final String clubImage;
+  final String clubName;
+  final String caption;
+  final String imageUrl;
   const ClubPage({Key key, this.clubName}) : super(key: key);
   @override
   _ClubPageState createState() => _ClubPageState(clubName);
