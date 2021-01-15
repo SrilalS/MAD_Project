@@ -45,8 +45,8 @@ class _HomeState extends State<Home> {
             .set({
           'Admin': false,
           'Club': '',
-          'Batch': 'Faculty of Computing',
-          'Faculty': '19.1',
+          'Batch': '19.1',
+          'Faculty': 'Faculty of Computing',
           'Clubs': [],
         });
       }
