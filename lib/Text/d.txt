@@ -77,8 +77,8 @@ class _DtestState extends StateDtest {
                 child RaisedButton(
                   padding const EdgeInsets.all(8.0),
                   textColor Colors.black,
-                  color Colors.blueGrey[400],
-                  child new Text(ADD),
+                  color Colors.blueGrey[300],
+                  child new Text(EDIT),
                   shape RoundedRectangleBorder(
                       borderRadius BorderRadius.circular(100)),
                   onPressed () {
