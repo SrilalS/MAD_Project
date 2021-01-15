@@ -22,7 +22,7 @@ class _ClubPageState extends State<ClubPage> {
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: Palette.facebookBlue,
+                color: Colors.blue,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
