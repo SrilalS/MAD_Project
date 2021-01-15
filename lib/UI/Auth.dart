@@ -14,7 +14,6 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> {
-
   Widget switcher = Text('SignIn With Google');
 
   void signInWithGoogle() async {
@@ -32,7 +31,9 @@ class _AuthState extends State<Auth> {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await FirebaseAuth.instance.signInWithCredential(credential).then((value){
+      await FirebaseAuth.instance
+          .signInWithCredential(credential)
+          .then((value) {
         print(value.user.email);
         Get.off(Home());
       });
@@ -42,7 +43,10 @@ class _AuthState extends State<Auth> {
         'SignIn Failed please retry',
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
-        icon: Icon(Icons.error, color: Colors.white,),
+        icon: Icon(
+          Icons.error,
+          color: Colors.white,
+        ),
       );
       setState(() {
         switcher = Text('SignIn with Google');
@@ -65,16 +69,19 @@ class _AuthState extends State<Auth> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-           Column(
-             children: [
-               mainLogo(),
-               SizedBox(height: 4),
-               Text('Clubs Plus', style: titleTexts(Colors.grey.shade800, FontWeight.bold, 24),),
-             ],
-           ),
+            Column(
+              children: [
+                mainLogo(),
+                SizedBox(height: 4),
+                Text(
+                  'Clubs Plus',
+                  style: titleTexts(Colors.grey.shade800, FontWeight.bold, 24),
+                ),
+              ],
+            ),
             Container(
               height: 128,
-              width: Get.width*0.75,
+              width: Get.width * 0.75,
               child: Card(
                 shape: rShapeBorder(16),
                 elevation: 4,
@@ -82,14 +89,15 @@ class _AuthState extends State<Auth> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Sign In',
-                        style: titleTexts(Colors.grey.shade800, FontWeight.bold, 32)),
+                        style: titleTexts(
+                            Colors.grey.shade800, FontWeight.bold, 32)),
                     Container(
                       child: RaisedButton(
                         color: Colors.blue,
                         textTheme: ButtonTextTheme.primary,
                         shape: rShapeBorder(32),
                         child: switcher,
-                        onPressed: (){
+                        onPressed: () {
                           signInWithGoogle();
                         },
                       ),
@@ -98,7 +106,6 @@ class _AuthState extends State<Auth> {
                 ),
               ),
             ),
-
           ],
         ),
       )),
