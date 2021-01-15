@@ -35,7 +35,7 @@ class _SendNotifiState extends State<SendNotifi> {
       if (value.statusCode != 200) {
         Get.snackbar(
           'Send Failed!',
-          'Send Failed. Please retry',
+          'Send Failed. Please retry!',
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
           icon: Icon(
