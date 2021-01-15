@@ -81,7 +81,7 @@ class _ClubViewState extends State<ClubView> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Join This Club'),
+                    isJoined ? Text('Leave This Club') : Text('Join This Club'),
                     Center(
                       child: isJoined ? RaisedButton.icon(
                         shape: RoundedRectangleBorder(

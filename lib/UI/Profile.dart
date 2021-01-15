@@ -3,8 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mad_project/Classes/GlobleData.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
+import 'package:mad_project/UI/Auth.dart';
+import 'package:mad_project/main.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -14,6 +17,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   FirebaseAuth fauth = FirebaseAuth.instance;
   FirebaseFirestore fstore = FirebaseFirestore.instance;
+
+
 
   String faculty = 'Faculty of Computing';
   String batch = '19.1';
@@ -93,41 +98,60 @@ class _ProfileState extends State<Profile> {
 
               Text('Batch: ' + batch),
               Text('Faculty: ' + faculty),
-              Visibility(
-                visible: !editmode,
-                child: Container(
-                  child: RaisedButton(
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Visibility(
+                    visible: !editmode,
+                    child: Container(
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        onPressed: (){
+                          setState(() {
+                            editmode = !editmode;
+                          });
+                        },
+                        child: Text('Edit Profile', style: TextStyle(color: Colors.white)),
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: editmode,
+                    child: Container(
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        onPressed: (){
+                          saveProfile();
+                          setState(() {
+                            editmode = !editmode;
+                          });
+                        },
+                        child: Text('Save', style: TextStyle(color: Colors.white)),
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)
                     ),
-                    onPressed: (){
-                      setState(() {
-                        editmode = !editmode;
-                      });
+                    onPressed: () async{
+                      await FirebaseAuth.instance.signOut();
+                      await GoogleSignIn().signOut();
+                      Get.offAll(Auth());
                     },
-                    child: Text('Edit Profile', style: TextStyle(color: Colors.white)),
-                    color: Colors.blue,
+                    child: Text('SignOut', style: TextStyle(color: Colors.white)),
+                    color: Colors.red,
                   ),
-                ),
+                ],
               ),
-              Visibility(
-                visible: editmode,
-                child: Container(
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)
-                    ),
-                    onPressed: (){
-                      saveProfile();
-                      setState(() {
-                        editmode = !editmode;
-                      });
-                    },
-                    child: Text('Save', style: TextStyle(color: Colors.white)),
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+
               
               Visibility(
                 visible: editmode,

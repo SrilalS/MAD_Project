@@ -61,12 +61,19 @@ class _ClubEventsState extends State<ClubEvents> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(4),
+                                    padding: const EdgeInsets.all(8),
+                                    child: Text(snapshot.data.docs[index]
+                                    ['Title'],
+                                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
                                     child: Text(snapshot.data.docs[index]
                                     ['Description']),
                                   ),
                                   CachedNetworkImage(
-                                    fit: BoxFit.fitWidth,
+                                    fit: BoxFit.fitHeight,
                                     width: Get.width,
                                     height: 256,
                                     imageUrl: snapshot.data.docs[index]
