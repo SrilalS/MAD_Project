@@ -126,7 +126,12 @@ class _ClubHomePageState extends State<ClubHomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(4),
+                                    padding: const EdgeInsets.all(8),
+                                    child: Text(snapshot.data.docs[index]
+                                    ['Title'], style: ,),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
                                     child: Text(snapshot.data.docs[index]
                                     ['Description']),
                                   ),
