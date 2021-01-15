@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClubEvents extends StatefulWidget {
   final DocumentSnapshot clubDoc;
@@ -56,7 +57,10 @@ class _ClubEventsState extends State<ClubEvents> {
                             elevation: 8,
                             child: InkWell(
                               splashColor: Colors.blue,
-                              onTap: () {},
+                              onTap: () async{
+                                await launch(snapshot.data.docs[index]
+                                ['Link']);
+                              },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

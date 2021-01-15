@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mad_project/Classes/StorageController.dart';
 import 'package:mad_project/Styles/TextStyles.dart';
 import 'package:mad_project/UI/Admin/Notifications/Send.dart';
+import 'package:mad_project/UI/ClubView/Members.dart';
 import 'package:mad_project/UI/ClubView/NewPostEvent.dart';
 
 class AdminUI extends StatefulWidget {
@@ -200,7 +201,18 @@ class _AdminUIState extends State<AdminUI> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
                   child: Text('Members', style: TextStyle(color: Colors.white)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.defaultDialog(
+                      radius: 8,
+                      title: 'Members',
+                      content: Memebers(clubID: widget.clubDoc.id),
+                      backgroundColor: Colors.grey.shade200,
+                      cancel: TextButton(
+                        onPressed: (){Get.back();},
+                        child: Text('Close'),
+                      )
+                    );
+                  },
                 ),
               ],
             ),

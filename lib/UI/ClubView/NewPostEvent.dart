@@ -95,6 +95,7 @@ class _NewPostEventState extends State<NewPostEvent> {
       'Description': desc.text,
       'Type': type,
       'Photo': photoURL,
+      'Link': link.text,
       'Date': date.year.toString() +'-'+ date.month.toString() +'-'+ date.day.toString()+' '+time.hour.toString()+':'+time.minute.toString(),
     }).then((value){
       Get.back();
