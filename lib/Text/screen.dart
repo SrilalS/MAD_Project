@@ -21,7 +21,7 @@ class _ClubPageState extends State<ClubPage> {
         appBar: AppBar(
           leading: IconButton(
               icon: Icon(
-                Icons.arrow_back_ios,
+                Icons.backpack,
                 color: Colors.blue,
               ),
               onPressed: () {
