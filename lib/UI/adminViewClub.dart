@@ -109,9 +109,12 @@ class _AdminViewClubState extends State<AdminViewClub> {
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(
-                  widget.clubName,
-                ),
+                child: Text(widget.clubName,
+                    style: TextStyle(
+                        fontSize: 35,
+                        letterSpacing: 1.5,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600)),
               ),
               Container(
                 padding: EdgeInsets.all(10.0),
