@@ -2,21 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Memebers extends StatefulWidget {​​​​
-  final String clubID;
-  const Memebers({​​​​Key key, this.clubID}​​​​) : super(key: key);
-  @override
-  _MemebersState createState() => _MemebersState();
-}class _MemebersState extends State<Memebers> {​​​​
-
+ 
   List<String> members = [];
   FirebaseFirestore fbase = FirebaseFirestore.instance;
-  getMembers(){​​​​
-    fbase.collection('Users').get().then((value){​​​​
-      value.docs.forEach((element) {​​​​
-        List clubs = element['Clubs'];
-        if (clubs.contains(widget.clubID)){​​​​
-          members.add(element.id);
-        }​​​​
+  getMembers()
       }​​​​);
     }​​​​).then((value){​​​​
       setState(() {​​​​
@@ -24,11 +13,4 @@ class Memebers extends StatefulWidget {​​​​
     }​​​​);
   }​​​​
 
-  @override
-  void initState() {​​​​
-    super.initState();
-    getMembers();
-  }​​​​
-
  
-}​​​​
