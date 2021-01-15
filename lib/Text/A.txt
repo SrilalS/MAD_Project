@@ -1,0 +1,4 @@
+[5:13 PM] Mr. SPS Sachintha
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
