@@ -48,7 +48,7 @@ class _ClubPageState extends State<ClubPage> {
         body: Column(
           children: [
             ClubHeader(
-              clubName: clubName,
+              clubName: 'Dancing clubs',
             ),
             Expanded(
               flex: 1,
