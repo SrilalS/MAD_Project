@@ -100,9 +100,12 @@ class Viewprofile extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(0),
-                child: Text(
-                  "profile",
-                ),
+                child: Text("profile",
+                    style: TextStyle(
+                        fontSize: 35,
+                        letterSpacing: 1.5,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600)),
               ),
               Container(
                 padding: EdgeInsets.all(10.0),
