@@ -21,7 +21,7 @@ class _DtestState extends StateDtest {
           color Colors.blueGrey[600],
           child new Text(Edit),
           onPressed () {
-            dialogTest(Drama Club, Hello Drama Club,
+            dialogTest(IEEE Club, Hello IEEE Club,
                 'httpswww.nsbm.ac.lkwp-contentuploads201908footer_logo.png');
           },
         ),
