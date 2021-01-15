@@ -1,15 +1,5 @@
 import 'package:mad_project/config/palette.dart';
 
-import 'package:mad_project/models/post_model.dart';
-//import 'package:mad_project/data/data.dart';
-//import 'package:mad_project/models/models.dart';
-
-import 'package:mad_project/services/database_service.dart';
-import 'package:mad_project/widgets/club_header.dart';
-import 'package:mad_project/widgets/club_post_container.dart';
-// import 'package:mad_project/widgets/create_post_container.dart';
-
-import 'package:mad_project/widgets/post_container.dart';
 import 'package:flutter/material.dart';
 
 class ClubPage extends StatefulWidget {
