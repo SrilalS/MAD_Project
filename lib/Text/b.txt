@@ -5,13 +5,7 @@ class Memebers extends StatefulWidget {​​​​
  
   List<String> members = [];
   FirebaseFirestore fbase = FirebaseFirestore.instance;
-  getMembers(){​​​​
-    fbase.collection('Users').get().then((value){​​​​
-      value.docs.forEach((element) {​​​​
-        List clubs = element['Clubs'];
-        if (clubs.contains(widget.clubID)){​​​​
-          members.add(element.id);
-        }​​​​
+  getMembers()
       }​​​​);
     }​​​​).then((value){​​​​
       setState(() {​​​​
