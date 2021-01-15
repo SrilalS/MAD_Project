@@ -33,7 +33,7 @@ class _ClubPageState extends State<ClubPage> {
             clubName,
             style: const TextStyle(
 
-              color: Palette.nsbmgreen,
+              color: Colors.black,
 
               color:Palette.nsbmgreen,
 
