@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Memebers extends StatefulWidget {​​​​
  
-  List<String> members = [];
-  FirebaseFirestore fbase = FirebaseFirestore.instance;
-  getMembers()
-      }​​​​);
+  }​​​​)
     }​​​​).then((value){​​​​
       setState(() {​​​​
       }​​​​);
