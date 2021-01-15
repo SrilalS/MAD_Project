@@ -24,11 +24,4 @@ class Memebers extends StatefulWidget {​​​​
     }​​​​);
   }​​​​
 
-  @override
-  void initState() {​​​​
-    super.initState();
-    getMembers();
-  }​​​​
-
  
-}​​​​
