@@ -203,15 +203,16 @@ class _AdminUIState extends State<AdminUI> {
                   child: Text('Members', style: TextStyle(color: Colors.white)),
                   onPressed: () {
                     Get.defaultDialog(
-                      radius: 8,
-                      title: 'Members',
-                      content: Memebers(clubID: widget.clubDoc.id),
-                      backgroundColor: Colors.grey.shade200,
-                      cancel: TextButton(
-                        onPressed: (){Get.back();},
-                        child: Text('Close'),
-                      )
-                    );
+                        radius: 8,
+                        title: 'Members',
+                        content: Memebers(clubID: widget.clubDoc.id),
+                        backgroundColor: Colors.grey.shade200,
+                        cancel: TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text('Close'),
+                        ));
                   },
                 ),
               ],
@@ -281,7 +282,7 @@ class _AdminUIState extends State<AdminUI> {
                               onPressed: () {
                                 coverPhoto();
                               },
-                              child: Text('Select Cover Image'),
+                              child: Text('Select the Cover Image'),
                             ),
                           ),
                           Row(
