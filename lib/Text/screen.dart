@@ -83,11 +83,7 @@ class _ClubPageState extends State<ClubPage> {
   }
 }
 
-  uploadImage() async {
-    final _storage = FirebaseStorage.instance;
-    final _picker = ImagePicker();
-    PickedFile image;
-
+  uploadImage() 
 
     //Check Permissions
     await Permission.photos.request();
