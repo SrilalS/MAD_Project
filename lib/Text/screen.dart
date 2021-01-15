@@ -105,12 +105,6 @@ class _ClubPageState extends State<ClubPage> {
         setState(() {
           imageUrl = downloadUrl;
         });
-      } else {
-        print('No Path Received');
-      }
 
-    } else {
-      print('Grant Permissions and try again');
-    }
 
     print(imageUrl);}
