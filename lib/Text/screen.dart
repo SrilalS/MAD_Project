@@ -35,7 +35,7 @@ class _ClubPageState extends State<ClubPage> {
 
               color: Colors.black,
 
-              color:Palette.nsbmgreen,
+              // color:Palette.nsbmgreen,
 
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class _ClubPageState extends State<ClubPage> {
             Expanded(
               flex: 1,
               child: StreamBuilder<List<Post>>(
-                stream: DatabaseService().getPostfromclubName(clubName),
+                // stream: DatabaseService().getPostfromclubName(clubName),
 
                 builder: (context, snapshot) {
                   return ListView.builder(
