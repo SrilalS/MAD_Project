@@ -24,18 +24,18 @@ class _ClubViewState extends State<ClubView> {
   int page = 0;
   bool isAdmin = true;
   PageController pageController = new PageController();
-  List<String> pageNames = ['Home','Clubs','Profile'];
+  List<String> pageNames = ['Home', 'Clubs', 'Profile'];
   List clubsList = user['Clubs'];
 
   bool isJoined = false;
-  void checkifJoined(){
-
-    if (clubsList.contains(widget.clubDoc.id)){
+  void checkifJoined() {
+    if (clubsList.contains(widget.clubDoc.id)) {
       setState(() {
         isJoined = true;
       });
     }
   }
+
   @override
   void initState() {
     checkifJoined();
@@ -49,25 +49,29 @@ class _ClubViewState extends State<ClubView> {
       child: Scaffold(
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: page,
-            onTap: (index){
+            onTap: (index) {
               setState(() {
                 page = index;
                 pageController.jumpToPage(page);
               });
             },
             items: [
-              BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Club Home',),
-              BottomNavigationBarItem(icon: Icon(FeatherIcons.alignCenter), label: 'Events'),
-              (user['Admin'] && user['Club'] == widget.clubDoc.id) ?
-              BottomNavigationBarItem(icon: Icon(FeatherIcons.shield), label: 'Admin') :
-              BottomNavigationBarItem(icon: Icon(FeatherIcons.plusCircle), label: 'Join')
-
-
+              BottomNavigationBarItem(
+                icon: Icon(FeatherIcons.home),
+                label: 'Club Home',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(FeatherIcons.alignCenter), label: 'Events'),
+              (user['Admin'] && user['Club'] == widget.clubDoc.id)
+                  ? BottomNavigationBarItem(
+                      icon: Icon(FeatherIcons.shield), label: 'Admin')
+                  : BottomNavigationBarItem(
+                      icon: Icon(FeatherIcons.plusCircle), label: 'Join')
             ],
           ),
           body: PageView(
             controller: pageController,
-            onPageChanged: (pg){
+            onPageChanged: (pg) {
               setState(() {
                 page = pg;
               });
@@ -75,87 +79,98 @@ class _ClubViewState extends State<ClubView> {
             children: [
               ClubHomePage(clubDoc: widget.clubDoc),
               ClubEvents(clubDoc: widget.clubDoc),
-              (user['Admin'] && user['Club'] == widget.clubDoc.id) ? AdminUI(clubDoc: widget.clubDoc) :
-              Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    isJoined ? Text('Leave This Club') : Text('Join This Club'),
-                    Center(
-                      child: isJoined ? RaisedButton.icon(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)
+              (user['Admin'] && user['Club'] == widget.clubDoc.id)
+                  ? AdminUI(clubDoc: widget.clubDoc)
+                  : Container(
+                      child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        isJoined
+                            ? Text('Leave This Club')
+                            : Text('Join This Club'),
+                        Center(
+                          child: isJoined
+                              ? RaisedButton.icon(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  onPressed: () {
+                                    clubsList.removeWhere((element) {
+                                      return element == widget.clubDoc.id;
+                                    });
+                                    FirebaseFirestore.instance
+                                        .collection('Users')
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser.email)
+                                        .update({
+                                      'Clubs': clubsList,
+                                    }).then((value) {
+                                      FirebaseFirestore.instance
+                                          .collection('Users')
+                                          .doc(FirebaseAuth
+                                              .instance.currentUser.email)
+                                          .get()
+                                          .then((value) {
+                                        user = value;
+                                        setState(() {
+                                          isJoined = false;
+                                        });
+                                        Get.snackbar(
+                                            'Left from ' +
+                                                widget.clubDoc['Name'],
+                                            'You have left the Club ' +
+                                                widget.clubDoc['Name'],
+                                            colorText: Colors.white,
+                                            backgroundColor: Colors.red);
+                                      });
+                                    });
+                                  },
+                                  icon: Icon(FeatherIcons.minusCircle),
+                                  label: Text('Leave'),
+                                  color: Colors.red,
+                                  textColor: Colors.white,
+                                )
+                              : RaisedButton.icon(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    clubsList.add(widget.clubDoc.id);
+                                    FirebaseFirestore.instance
+                                        .collection('Users')
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser.email)
+                                        .update({
+                                      'Clubs': clubsList,
+                                    }).then((value) {
+                                      FirebaseFirestore.instance
+                                          .collection('Users')
+                                          .doc(FirebaseAuth
+                                              .instance.currentUser.email)
+                                          .get()
+                                          .then((value) {
+                                        user = value;
+                                        Get.snackbar(
+                                            'Joined ' + widget.clubDoc['Name'],
+                                            'You have Joined the Club ' +
+                                                widget.clubDoc['Name'],
+                                            colorText: Colors.white,
+                                            backgroundColor: Colors.green);
+                                        setState(() {
+                                          isJoined = true;
+                                        });
+                                      });
+                                    });
+                                  },
+                                  icon: Icon(FeatherIcons.plusCircle),
+                                  label: Text('Join'),
+                                ),
                         ),
-                        onPressed: (){
-                          clubsList.removeWhere((element){
-                            return element == widget.clubDoc.id;
-                          });
-                          FirebaseFirestore.instance
-                              .collection('Users')
-                              .doc(FirebaseAuth.instance.currentUser.email).update({
-                            'Clubs' : clubsList,
-                          }).then((value){
-                            FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc(FirebaseAuth.instance.currentUser.email)
-                                .get()
-                                .then((value){
-                              user = value;
-                              setState(() {
-                                isJoined = false;
-                              });
-                              Get.snackbar('Left from ' + widget.clubDoc['Name'], 'You have left the Club '  + widget.clubDoc['Name'],
-                                  colorText: Colors.white,
-                                  backgroundColor: Colors.red
-                              );
-                            });
-                          });
-                        },
-                        icon: Icon(FeatherIcons.minusCircle),
-                        label: Text('Leave'),
-                        color: Colors.red,
-                        textColor: Colors.white,
-                      ) : RaisedButton.icon(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)
-                        ),
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        onPressed: (){
-                          clubsList.add(widget.clubDoc.id);
-                          FirebaseFirestore.instance
-                              .collection('Users')
-                              .doc(FirebaseAuth.instance.currentUser.email).update({
-                            'Clubs' : clubsList,
-                          }).then((value){
-
-                            FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc(FirebaseAuth.instance.currentUser.email)
-                                .get()
-                                .then((value){
-                              user = value;
-                              Get.snackbar('Joined ' + widget.clubDoc['Name'], 'You have Joined the Club '  + widget.clubDoc['Name'],
-                                  colorText: Colors.white,
-                                  backgroundColor: Colors.green
-                              );
-                              setState(() {
-                                isJoined = true;
-                              });
-                            });
-                          });
-                        },
-                        icon: Icon(FeatherIcons.plusCircle),
-                        label: Text('Join'),
-                      ),
-                    ),
-                  ],
-                )
-              ),
+                      ],
+                    )),
             ],
-          )
-      ),
+          )),
     );
   }
 }
