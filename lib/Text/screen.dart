@@ -59,6 +59,7 @@ class _ClubPageState extends State<ClubPage> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return ClubPostContainer(
+                          header:snapshot.data[index].header,
                           caption: snapshot.data[index].caption,
                           imageUrl: snapshot.data[index].imageUrl,
                           clubImage: snapshot.data[index].clubImage,
