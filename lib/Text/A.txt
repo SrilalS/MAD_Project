@@ -1,8 +1,8 @@
-[9:14 PM] Mr. SPS Sachintha
+[11:14 PM] Mr. SPS Sachintha
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
