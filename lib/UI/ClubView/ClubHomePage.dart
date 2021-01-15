@@ -128,7 +128,7 @@ class _ClubHomePageState extends State<ClubHomePage> {
                                   Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: Text(snapshot.data.docs[index]
-                                    ['Title'], style: ,),
+                                    ['Title'], style: TextStyle(),),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8),
