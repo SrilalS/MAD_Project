@@ -70,9 +70,9 @@ class _DtestState extends StateDtest {
                   });
                 },
               ),
-              SizedBox(height 32),
+              SizedBox(height 42),
               Container(
-                height 48,
+                height 60,
                 width Get.width,
                 child RaisedButton(
                   padding const EdgeInsets.all(8.0),
