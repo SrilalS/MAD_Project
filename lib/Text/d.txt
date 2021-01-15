@@ -70,13 +70,13 @@ class _DtestState extends StateDtest {
                   });
                 },
               ),
-              SizedBox(height 32),
+              SizedBox(height 52),
               Container(
-                height 48,
+                height 64,
                 width Get.width,
                 child RaisedButton(
                   padding const EdgeInsets.all(8.0),
-                  textColor Colors.black,
+                  textColor Colors.white,
                   color Colors.blue[500],
                   child new Text(ADD),
                   shape RoundedRectangleBorder(
