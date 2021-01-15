@@ -35,16 +35,7 @@ class Memebers extends StatefulWidget {​​​​
     return Container(
         width: Get.width * 0.9,
         height: Get.height * 0.7,
-        child: ListView.builder(
-          itemCount: members.length,
-          itemBuilder: (context,index){​​​​
-            return Card(
-              child: ListTile(
-                title: Text(members[index]),
-              ),
-            );
-          }​​​​,
-        ),
+       
     );
   }​​​​
 }​​​​
