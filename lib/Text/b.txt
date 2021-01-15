@@ -2,12 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Memebers extends StatefulWidget {​​​​
-  final String clubID;
-  const Memebers({​​​​Key key, this.clubID}​​​​) : super(key: key);
-  @override
-  _MemebersState createState() => _MemebersState();
-}class _MemebersState extends State<Memebers> {​​​​
-
+ 
   List<String> members = [];
   FirebaseFirestore fbase = FirebaseFirestore.instance;
   getMembers(){​​​​
